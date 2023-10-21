@@ -53,4 +53,9 @@ public class ContractController {
         return ResponseEntity.ok("Success");
     }
 
+    @GetMapping("/active") //todo change format
+    public List<ContractDTO> getActiveContracts() {
+        return contractService.findAllByStatus(true);
+    }
+
 }

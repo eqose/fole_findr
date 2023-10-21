@@ -1,5 +1,6 @@
 package findr.fole;
 
+import findr.fole.service.ContractService;
 import findr.fole.service.StudentService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,9 +17,10 @@ public class FoleBackendApplication {
 	}
 
 	@Bean
-	ApplicationRunner runner(StudentService studentService) {
+	ApplicationRunner runner(StudentService studentService, ContractService contractService) {
 		return args -> {
 			System.out.println(studentService.findAll());
+			System.out.println(contractService.findAllByStatus(true));
 		};
 	}
 
