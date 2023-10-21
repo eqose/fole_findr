@@ -1,5 +1,6 @@
 package findr.fole.model;
 
+import findr.fole.enums.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,4 +24,6 @@ public class Student {
     private String lastName;
     private LocalDate birthDay;
     private String nationalNo;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 }
