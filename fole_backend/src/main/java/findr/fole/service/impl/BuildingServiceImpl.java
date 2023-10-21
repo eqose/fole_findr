@@ -1,7 +1,9 @@
 package findr.fole.service.impl;
 
+import findr.fole.dto.BuildingDTO;
 import findr.fole.dto.BuildingFloorDTO;
 import findr.fole.mapper.BuildingFloorMapper;
+import findr.fole.mapper.BuildingMapper;
 import findr.fole.model.BuildingFloor;
 import findr.fole.repository.BuildingFloorRepository;
 import findr.fole.repository.BuildingRepository;
@@ -16,28 +18,28 @@ import java.util.stream.Collectors;
 @Service
 public class BuildingServiceImpl implements BuildingService {
 
-    private final BuildingFloorRepository buildingFloorRepository;
+    private final BuildingRepository buildingRepository;
 
-    public BuildingServiceImpl(BuildingFloorRepository buildingFloorRepository) {
-        this.buildingFloorRepository = buildingFloorRepository;
+    public BuildingServiceImpl(BuildingRepository buildingRepository) {
+        this.buildingRepository = buildingRepository;
     }
 
 
     @Override
-    public List<BuildingFloorDTO> findAll(Specification<BuildingFloor> spec, Pageable pageable) {
+    public List<BuildingDTO> findAll(Specification<BuildingFloor> spec, Pageable pageable) {
         return null;
     }
 
     @Override
-    public List<BuildingFloorDTO> findAll(Specification<BuildingFloor> spec) {
+    public List<BuildingDTO> findAll(Specification<BuildingFloor> spec) {
         return null;
     }
 
     @Override
-    public List<BuildingFloorDTO> findAll() {
-        return buildingFloorRepository.findAll()
+    public List<BuildingDTO> findAll() {
+        return buildingRepository.findAll()
                 .stream()
-                .map(BuildingFloorMapper.INSTANCE::toDTO)
+                .map(BuildingMapper.INSTANCE::toDTO)
                 .collect(Collectors.toList());
     }
 
