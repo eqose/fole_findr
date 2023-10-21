@@ -22,6 +22,9 @@ import {CardModule} from "primeng/card";
 import {TableModule} from "primeng/table";
 import {HttpInterceptorService} from "./service/http-interceptor.service";
 import { FloorListComponent } from './components/floor-list/floor-list.component';
+import { RoomListComponent } from './components/room-list/room-list.component';
+import { StudentDetailComponent } from './components/student-list/student-detail/student-detail.component';
+import {SidebarModule} from "primeng/sidebar";
 
 @NgModule({
   declarations: [
@@ -30,25 +33,28 @@ import { FloorListComponent } from './components/floor-list/floor-list.component
     DashboardComponent,
     MenuComponent,
     StudentListComponent,
-    FloorListComponent],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    InputTextModule,
-    MessageModule,
-    HttpClientModule,
-    ButtonModule,
-    ReactiveFormsModule,
-    RadioButtonModule,
-    AppRoutingModule,
-    ProgressSpinnerModule,
-    ToastModule,
-    DockModule,
-    MenubarModule,
-    CardModule,
-    TableModule
-  ],
+    FloorListComponent,
+    RoomListComponent,
+    StudentDetailComponent],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        InputTextModule,
+        MessageModule,
+        HttpClientModule,
+        ButtonModule,
+        ReactiveFormsModule,
+        RadioButtonModule,
+        AppRoutingModule,
+        ProgressSpinnerModule,
+        ToastModule,
+        DockModule,
+        MenubarModule,
+        CardModule,
+        TableModule,
+        SidebarModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}],
   bootstrap: [AppComponent]

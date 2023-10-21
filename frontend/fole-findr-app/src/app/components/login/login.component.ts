@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../service/auth.service";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
+import {DataSharingService} from "../../service/data-sharing-service";
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.css'],
   providers: [MessageService]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public username: string = '';
   public password: string = '';
   public role: string = '';
@@ -18,6 +19,7 @@ export class LoginComponent {
 
   constructor(private readonly authService: AuthService,
               private router: Router,
+              private readonly dataSharingService :DataSharingService,
               private readonly messageService: MessageService) {
   }
 
@@ -35,7 +37,7 @@ export class LoginComponent {
     this.authService.authenticateUser(data).subscribe({
       next: (data) => {
         if (data) {
-          localStorage.setItem('jwtToken', data.token)
+          sessionStorage.setItem('jwtToken', data.token)
         } else {
           this.messageService.add({severity: 'error', summary: 'Error!', detail: 'Username ose password i gabuar!'});
         }
@@ -50,8 +52,13 @@ export class LoginComponent {
         });
       }, complete: () => {
         this.loader = false
+        this.dataSharingService.isLogged.next(true);
         this.router.navigate(['/dashboard']);
       }
     })
+  }
+
+  ngOnInit(): void {
+    sessionStorage.setItem('jwtToken', '')
   }
 }

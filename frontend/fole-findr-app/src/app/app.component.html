@@ -1,4 +1,28 @@
 <div>
-<!--  <app-menu></app-menu>-->
+  <div class="top-panel" style="display: flex">
+    <p-button type="button" class="cts-button" (click)="sidebarVisible = true" icon="fa-solid fa-bars"></p-button>
+  </div>
+  <div>
+    <p-sidebar [(visible)]="sidebarVisible" position="left" styleClass="custom-sidebar-width" transitionOptions="300ms cubic-bezier(0, 0, 0.2, 1)">
+      <ng-template pTemplate="header">
+        <i class="fa-solid fa-magnifying-glass" style="margin-right: 5px;"></i>
+        <input pInputText
+               type="text"
+               style="font-size: 16px; margin-right: 3px"
+               placeholder="Kerko student..."
+               [(ngModel)]="inputName"
+               (ngModelChange)="onNameSearch()">
+      </ng-template>
+      <ng-template pTemplate="content">
+        <ng-container *ngFor="let item of items">
+          <div class="menu-item" (click)="onItemSelect(item)">
+            <i [class]="item.icon" style="margin-right: 10px"></i>
+            <span>{{item.label}}</span>
+          </div>
+        </ng-container>
+      </ng-template>
+      <ng-template pTemplate="footer">Dil</ng-template>
+    </p-sidebar>
+  </div>
   <router-outlet></router-outlet>
 </div>

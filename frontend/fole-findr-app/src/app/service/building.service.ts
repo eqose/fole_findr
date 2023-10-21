@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {BuildingFloor} from "../model/building-floor";
+import {AppSettings} from "../constants/app-settings";
+import {AppUrl} from "../constants/app-url";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BuildingService {
 
-  constructor(private readonly httpClient :HttpClient) { }
+  constructor(private readonly httpClient: HttpClient) {
+  }
 
-  public getFloorsOfBuilding(id: number): Observable<any>{
-    return ;
+  public getFloorsOfBuilding(id: number): Observable<BuildingFloor[]> {
+    return this.httpClient.get<BuildingFloor[]>(AppSettings.BASE_URL + AppUrl.BUILDING_URL + '/' + id)
   }
 }

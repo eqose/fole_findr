@@ -21,6 +21,12 @@
   cursor: pointer;
 }
 
+.close:hover{
+  transition: 0.5s;
+  transform: scale(1.15);
+  cursor: pointer;
+}
+
 .centered-div {
   display: none;
   position: fixed;
@@ -51,3 +57,5 @@
     transform: translate(-50%, -50%) scale(1);
   }
 }
+
+

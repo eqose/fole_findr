@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {Router} from "@angular/router";
+import {BuildingFloor} from "../../model/building-floor";
+import {BuildingService} from "../../service/building.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,9 +13,11 @@ export class DashboardComponent implements OnInit{
   public items: MenuItem[] = [];
   public floorShow = false;
   public selectedBuilding: string = '';
-  public floorList: number[] = [1,2,3,4,7,8,5,3,4,6];
+  public floorList: BuildingFloor[] = [];
+  public loader = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private readonly buildingService :BuildingService) {
   }
 
   ngOnInit() {
@@ -39,6 +43,7 @@ export class DashboardComponent implements OnInit{
     ];
   }
   public onBuildingClick(item: any) {
+    this.loadFloors(item.id)
     this.floorShow = true;
     this.selectedBuilding = item.label;
   }
@@ -49,6 +54,14 @@ export class DashboardComponent implements OnInit{
   }
 
   public onFloorClick(id: number){
+  }
 
+  public loadFloors(id: number) {
+    this.loader = true
+    this.buildingService.getFloorsOfBuilding(id).subscribe({
+      next: (data)=> this.floorList = data.reverse(),
+      error: (err) => console.log('error', err),
+      complete: ()=> this.loader = false
+    })
   }
 }

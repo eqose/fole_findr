@@ -17,6 +17,6 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('jwtToken');
+    return sessionStorage.getItem('jwtToken');
   }
 }

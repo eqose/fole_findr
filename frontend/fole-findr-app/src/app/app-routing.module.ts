@@ -8,7 +8,8 @@ import {StudentListComponent} from "./components/student-list/student-list.compo
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-  {path: 'students', component: StudentListComponent},
+  {path: 'studentet', component: StudentListComponent},
+  {path: 'dhomat', component: StudentListComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 ];
 
