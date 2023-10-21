@@ -7,7 +7,7 @@
   },
   "files": [
     "src/main.ts",
-    "src/app/constants/AppSettings.ts"
+    "src/app/constants/app-settings.ts"
   ],
   "include": [
     "src/**/*.d.ts"

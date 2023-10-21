@@ -1,0 +1,8 @@
+<div style="width: 100px">
+  <button class="cust" pButton style="width: 100px;padding: 20px" icon="fa-solid fa-bars" (click)="shoMenu()"></button>
+</div>
+<div style="display: flex; flex-direction: column">
+  <ng-container *ngFor="let item of meuitems">
+    <span>{{item.label}}</span>
+  </ng-container>
+</div>
