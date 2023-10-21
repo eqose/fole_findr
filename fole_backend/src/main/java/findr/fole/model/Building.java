@@ -1,6 +1,5 @@
 package findr.fole.model;
 
-import findr.fole.enums.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,22 +7,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "student")
-public class Student {
+@Table(name = "building")
+public class Building {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "first_name")
-    private String firstName;
-    private String lastName;
-    private LocalDate birthDay;
-    private String nationalNo;
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private String name;
+    private int floorNum;
+    private int roomNum;
+    private  String photoPath;
 }
