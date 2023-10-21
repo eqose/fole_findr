@@ -58,9 +58,9 @@ public class StudentController {
         studentService.uploadStudentProfileImage(customerId, file);
     }
 
-    @PostMapping(
-            value = "{studentId}/profile-image",
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    @GetMapping(
+            value = "{customerId}/profile-image",
+            produces = MediaType.IMAGE_JPEG_VALUE
     )
     public byte[] getStudentProfileImage(
             @PathVariable("studentId") Integer studentId,

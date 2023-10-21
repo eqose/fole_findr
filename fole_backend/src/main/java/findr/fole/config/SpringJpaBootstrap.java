@@ -7,6 +7,7 @@ import findr.fole.repository.StudentRepository;
 import findr.fole.repository.UserRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -16,10 +17,12 @@ import java.util.Optional;
 public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private final UserRepository userRepository;
     private final StudentRepository studentRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public SpringJpaBootstrap(UserRepository userRepository, StudentRepository studentRepository) {
+    public SpringJpaBootstrap(UserRepository userRepository, StudentRepository studentRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -35,7 +38,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
             user.setUsername("Admin");
             user.setFirstName("Admin");
             user.setLastName("Admin");
-            user.setPassword("1234");
+            user.setPassword(passwordEncoder.encode("1234"));
             user.setRole(Role.ADMIN);
             userRepository.save(user);
         }
@@ -45,7 +48,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
             user.setUsername("User");
             user.setFirstName("User");
             user.setLastName("User");
-            user.setPassword("User");
+            user.setPassword(passwordEncoder.encode("1234"));
             user.setRole(Role.USER);
             userRepository.save(user);
         }

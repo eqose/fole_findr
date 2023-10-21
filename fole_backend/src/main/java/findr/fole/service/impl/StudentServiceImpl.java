@@ -57,7 +57,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void addStudent(StudentRegistrationRequest request) {
         String nationalId = request.nId();
-        if(studentRepository.existsCustomerWithnationalNo(nationalId)) {
+        if(studentRepository.existsStudentByNationalNo(nationalId)) {
             throw new DuplicateResourceException("National ID is already used");
         }
 
