@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -120,34 +121,34 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public List<StudentDTO> findAllByBuildingId(Integer id) {
+    public List<StudentDTO> findAllByBuildingId(Integer id, LocalDate start, LocalDate end) {
          List<Integer> builidngsId  = buildingFloorRepository.findBuildingFloorByBuilding_Id(id).stream().map(i -> i.getId()).collect(Collectors.toList());
         List<Integer> allIdByBuildingFloorIds = roomRepository.findRoomsIdByBuildingFloorIdIn(builidngsId).stream().map(i -> i.getId()).collect(Collectors.toList());
-        return contractRepository.findStudentsByRoomIdIn(allIdByBuildingFloorIds)
+        return contractRepository.findStudentsByRoomIdIn(allIdByBuildingFloorIds, start, end)
                 .stream()
                 .map(StudentMapper.INSTANCE::toDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<StudentDTO> findAllByBuildingFloorId(Integer id) {
+    public List<StudentDTO> findAllByBuildingFloorId(Integer id, LocalDate start, LocalDate end) {
         List<Integer> allIdByBuildingFloorIds = roomRepository.findRoomsIdByBuildingFloorIdIn(List.of(id)).stream().map(i -> i.getId()).collect(Collectors.toList());
-        return contractRepository.findStudentsByRoomIdIn(allIdByBuildingFloorIds)
+        return contractRepository.findStudentsByRoomIdIn(allIdByBuildingFloorIds, start, end)
                 .stream()
                 .map(StudentMapper.INSTANCE::toDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<StudentDTO> findAllByRoomId(Integer id) {
-        return contractRepository.findStudentsByRoomIdIn(List.of(id))
+    public List<StudentDTO> findAllByRoomId(Integer id, LocalDate start, LocalDate end) {
+        return contractRepository.findStudentsByRoomIdIn(List.of(id), start, end)
                 .stream()
                 .map(StudentMapper.INSTANCE::toDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<StudentDTO> findAllByContractId(Integer id) {
+    public List<StudentDTO> findAllByContractId(Integer id, LocalDate start, LocalDate end) {
         return contractRepository.findAllDistinctStudentsById(id)
                 .stream()
                 .map(StudentMapper.INSTANCE::toDTO)

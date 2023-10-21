@@ -26,4 +26,6 @@ public class Student {
     private String nationalNo;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    @ManyToOne()
+    private Building building;
 }
