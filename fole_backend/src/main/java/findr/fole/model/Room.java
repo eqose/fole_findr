@@ -17,8 +17,8 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     private RoomType roomType;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     private BuildingFloor buildingFloor;
 }

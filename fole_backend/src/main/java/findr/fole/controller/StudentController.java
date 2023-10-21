@@ -1,8 +1,11 @@
 package findr.fole.controller;
 
 import findr.fole.dto.StudentDTO;
+import findr.fole.rest.req.StudentFilterRequest;
 import findr.fole.rest.req.StudentRegistrationRequest;
 import findr.fole.rest.req.StudentUpdateRequest;
+import findr.fole.service.BuildingFloorService;
+import findr.fole.service.BuildingService;
 import findr.fole.service.StudentService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +18,34 @@ import java.util.List;
 @RequestMapping("/api/v1/students")
 public class StudentController {
     private final StudentService studentService;
-
-    public StudentController(StudentService studentService) {
+    private final BuildingService buildingService;
+    private final BuildingFloorService buildingFloorService;
+    public StudentController(StudentService studentService, BuildingService buildingService, BuildingFloorService buildingFloorService) {
         this.studentService = studentService;
+        this.buildingService = buildingService;
+        this.buildingFloorService = buildingFloorService;
     }
 
     @GetMapping
-    public List<StudentDTO> getStudents() {
+    public List<StudentDTO> getStudents(@RequestBody StudentFilterRequest request) {
+        if(request.godinaId()!=null) {
+            return studentService.findAllByBuildingId(request.godinaId());
+        }
+        if(request.katiId()!=null) {
+            return studentService.findAllByBuildingFloorId(request.katiId());
+        }
+        if(request.roomId()!=null) {
+            return studentService.findAllByRoomId(request.roomId());
+        }
+        if(request.contractId()!=null) {
+            return studentService.findAllByContractId(request.contractId());
+        }
         return studentService.findAll();
+    }
+    @GetMapping("/search")
+    public List<StudentDTO> searchStudents(@RequestParam String searchFilter) {
+
+        return studentService.search(searchFilter);
     }
 
     @GetMapping("{studentId}")
