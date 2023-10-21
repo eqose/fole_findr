@@ -1,0 +1,20 @@
+<div>
+  <h3 style="padding: 10px">Mirësevini në foléFindr</h3>
+  <div style="display:flex; flex-direction: column; padding: 10px">
+    <span>Username</span>
+    <input pInputText type="text" style="width: 100%" [(ngModel)]="username" (ngModelChange)="setUsername()">
+  </div>
+  <div style="display:flex; flex-direction: column; padding: 10px">
+    <span>Password</span>
+    <input pInputText type="password" style="width: 100%" [(ngModel)]="password" (ngModelChange)="setPass()">
+  </div>
+  <div style="display: flex; padding: 10px; justify-content: space-between">
+    <p-radioButton label="Menaxher" name="menaxher" value="Menaxher" [(ngModel)]="role"></p-radioButton>
+    <p-radioButton label="Recepsionist" name="recepsionist" value="Recepsionist" [(ngModel)]="role"></p-radioButton>
+  </div>
+  <div style="display: flex; padding: 10px; justify-content: space-between">
+    <p-toast></p-toast>
+    <button pButton type="button" label="Login" style="font-size: 16px;" (click)="onAuthenticate()"></button>
+  </div>
+  <p-progressSpinner *ngIf="loader" [style]="{ width: '50px', height: '50px' }"></p-progressSpinner>
+</div>
