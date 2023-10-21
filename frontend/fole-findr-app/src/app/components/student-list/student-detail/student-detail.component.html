@@ -1,1 +1,32 @@
-<p>student-detail works!</p>
+<div>
+  <p-card>
+    <div class="input-div">
+      <span>Emri: </span>
+      <input pInputText type="text" [(ngModel)]="student.firstName">
+    </div>
+    <div class="input-div">
+      <span>Mbiemri: </span>
+      <input pInputText type="text" [(ngModel)]="student.lastName">
+    </div>
+    <div class="input-div">
+      <span>Gjinia: </span>
+      <p-radioButton name="M" label="M" value="MALE" [(ngModel)]="student.gender"></p-radioButton>
+      <p-radioButton name="F" label="F" value="FEMALE" [(ngModel)]="student.gender"></p-radioButton>
+    </div>
+    <div class="input-div">
+      <span>Data e lindjes: </span>
+      <p-calendar appendTo="body" [(ngModel)]="student.birthDay"></p-calendar>
+    </div>
+    <div class="input-div">
+      <span>Nr. identitetit: </span>
+      <input pInputText type="text" [(ngModel)]="student.nId">
+    </div>
+    <div class="input-div">
+      <span>Emaili: </span>
+      <input pInputText type="text" [(ngModel)]="student.email">
+    </div>
+    <div style="display: flex; justify-content: flex-end; padding: 10px">
+      <button pButton label="Ruaj" (click)="onStudentSave()"></button>
+    </div>
+  </p-card>
+</div>

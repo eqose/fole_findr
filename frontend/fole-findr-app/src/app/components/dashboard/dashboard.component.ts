@@ -3,6 +3,7 @@ import {MenuItem} from "primeng/api";
 import {Router} from "@angular/router";
 import {BuildingFloor} from "../../model/building-floor";
 import {BuildingService} from "../../service/building.service";
+import {DataSharingService} from "../../service/data-sharing-service";
 
 @Component({
   selector: 'app-dashboard',
@@ -17,34 +18,21 @@ export class DashboardComponent implements OnInit{
   public loader = false;
 
   constructor(private router: Router,
-              private readonly buildingService :BuildingService) {
+              private readonly buildingService :BuildingService,
+              private readonly dataSharingService :DataSharingService) {
   }
 
   ngOnInit() {
-    this.items = [
-      {
-        label: 'Godina A',
-        icon: 'fa-solid fa-building',
-        style: 'color: #27c792',
-        id: '1'
-      },
-      {
-        label: 'Godina B',
-        icon: 'fa-solid fa-building',
-        style: 'color: #27c792',
-        id: '2'
-      },
-      {
-        label: 'Godina C',
-        icon: 'fa-solid fa-building',
-        style: 'color: #27c792',
-        id: '3'
+    this.dataSharingService.menuItems.subscribe((items)=>{
+      if (items){
+        this.items = items
       }
-    ];
+    })
   }
   public onBuildingClick(item: any) {
     this.loadFloors(item.id)
     this.floorShow = true;
+    this.dataSharingService.menuItem.next(item.id)
     this.selectedBuilding = item.label;
   }
 

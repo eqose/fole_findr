@@ -19,4 +19,12 @@ export class AuthService {
   getToken(): string | null {
     return sessionStorage.getItem('jwtToken');
   }
+
+  logout(): void {
+    localStorage.removeItem('jwtToken');
+  }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('jwtToken');
+  }
 }

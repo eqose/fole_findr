@@ -1,9 +1,20 @@
 <div>
   <p-card>
-    <p-table [value]="studentList" [style]="{ 'min-width': '50rem' }">
+    <div style="padding: 10px">
+      <button pButton
+              style="font-size: 16px"
+              label="Shto student"
+              (click)="onNewStudent()"
+              icon="fas fa-plus"></button>
+    </div>
+    <p-table [value]="studentList">
       <ng-template pTemplate="header">
         <tr>
-          <th>Emri</th>
+          <th>Studenti</th>
+          <th>Data e fillimit te kontrates</th>
+          <th>Data e mbarimit te kontrates</th>
+          <th>Kati</th>
+          <th>Dhoma</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-student>

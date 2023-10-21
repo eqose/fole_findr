@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
       next: (data) => {
         if (data) {
           sessionStorage.setItem('jwtToken', data.token)
+          sessionStorage.setItem('building', '2')
         } else {
           this.messageService.add({severity: 'error', summary: 'Error!', detail: 'Username ose password i gabuar!'});
         }

@@ -25,6 +25,8 @@ import { FloorListComponent } from './components/floor-list/floor-list.component
 import { RoomListComponent } from './components/room-list/room-list.component';
 import { StudentDetailComponent } from './components/student-list/student-detail/student-detail.component';
 import {SidebarModule} from "primeng/sidebar";
+import {DropdownModule} from "primeng/dropdown";
+import {CalendarModule} from "primeng/calendar";
 
 @NgModule({
   declarations: [
@@ -36,25 +38,27 @@ import {SidebarModule} from "primeng/sidebar";
     FloorListComponent,
     RoomListComponent,
     StudentDetailComponent],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        InputTextModule,
-        MessageModule,
-        HttpClientModule,
-        ButtonModule,
-        ReactiveFormsModule,
-        RadioButtonModule,
-        AppRoutingModule,
-        ProgressSpinnerModule,
-        ToastModule,
-        DockModule,
-        MenubarModule,
-        CardModule,
-        TableModule,
-        SidebarModule
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    InputTextModule,
+    MessageModule,
+    HttpClientModule,
+    ButtonModule,
+    ReactiveFormsModule,
+    RadioButtonModule,
+    AppRoutingModule,
+    ProgressSpinnerModule,
+    ToastModule,
+    DockModule,
+    MenubarModule,
+    CardModule,
+    TableModule,
+    SidebarModule,
+    DropdownModule,
+    CalendarModule
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}],
   bootstrap: [AppComponent]

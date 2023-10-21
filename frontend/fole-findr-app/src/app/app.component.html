@@ -1,6 +1,13 @@
 <div>
-  <div class="top-panel" style="display: flex">
+  <div class="top-panel" style="display: flex; justify-content: space-between">
     <p-button type="button" class="cts-button" (click)="sidebarVisible = true" icon="fa-solid fa-bars"></p-button>
+    <div style="display: flex; width: 21vw;justify-content: space-between;align-items: center;">
+      <span>Godina ku ndodheni: </span>
+      <p-dropdown class="home-dp" [options]="topItems" [(ngModel)]="selectedTopItem" optionLabel="label"></p-dropdown>
+    </div>
+    <div style="width: 50px;display: flex;align-items: center;">
+      <i style="cursor: pointer;font-size: 20px; color: #096547" class="fa-solid fa-right-from-bracket" (click)="onLogOut()"></i>
+    </div>
   </div>
   <div>
     <p-sidebar [(visible)]="sidebarVisible" position="left" styleClass="custom-sidebar-width" transitionOptions="300ms cubic-bezier(0, 0, 0.2, 1)">
@@ -21,7 +28,7 @@
           </div>
         </ng-container>
       </ng-template>
-      <ng-template pTemplate="footer">Dil</ng-template>
+      <ng-template pTemplate="footer">Kthehu ne dashboard</ng-template>
     </p-sidebar>
   </div>
   <router-outlet></router-outlet>

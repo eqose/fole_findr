@@ -7,7 +7,8 @@
   },
   "files": [
     "src/main.ts",
-    "src/app/constants/app-settings.ts"
+    "src/app/constants/app-settings.ts",
+    "src/app/constants/gender.ts"
   ],
   "include": [
     "src/**/*.d.ts"

@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   public sidebarVisible = false;
   public isLogged: boolean = false;
   public items: MenuItem[] = [];
+  public topItems: MenuItem[] = [];
+  public selectedTopItem!: MenuItem;
   public inputName: string = '';
 
   constructor(private readonly dataSharingService: DataSharingService,
@@ -20,6 +22,14 @@ export class AppComponent implements OnInit {
     this.dataSharingService.isLogged.subscribe((check) => {
       if (check) {
         this.isLogged = check;
+        this.selectedTopItem = this.topItems.filter(el => el.id == sessionStorage.getItem('building'))[0]
+        this.dataSharingService.menuItems.next(this.topItems);
+      }
+    })
+
+    this.dataSharingService.menuItem.subscribe((item) =>{
+      if (item){
+        this.selectedTopItem = this.topItems.filter(el => el.id == item)[0]
       }
     })
   }
@@ -42,6 +52,27 @@ export class AppComponent implements OnInit {
         routerLink: '/regjistrit'
       }
     ];
+
+    this.topItems = [
+      {
+        label: 'Godina A',
+        icon: 'fa-solid fa-building',
+        style: 'color: #27c792',
+        id: '1'
+      },
+      {
+        label: 'Godina B',
+        icon: 'fa-solid fa-building',
+        style: 'color: #27c792',
+        id: '2'
+      },
+      {
+        label: 'Godina C',
+        icon: 'fa-solid fa-building',
+        style: 'color: #27c792',
+        id: '3'
+      }
+    ];
   }
 
   onItemSelect(item: any){
@@ -50,6 +81,10 @@ export class AppComponent implements OnInit {
   }
 
   public onNameSearch() {
+
+  }
+
+  public onLogOut(){
 
   }
 }

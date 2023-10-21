@@ -29,3 +29,13 @@
   width: 100px;
   background-color: #27c792;
 }
+
+::ng-deep .home-dp .p-dropdown {
+  display: inline-flex;
+  cursor: pointer;
+  width: 10vw;
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+  padding: 7px;
+}
