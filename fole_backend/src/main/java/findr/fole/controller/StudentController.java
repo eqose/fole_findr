@@ -32,15 +32,20 @@ public class StudentController {
             return studentService.findAllByBuildingId(request.godinaId());
         }
         if(request.katiId()!=null) {
-            return studentService.findAllByBuildingId(request.katiId());
+            return studentService.findAllByBuildingFloorId(request.katiId());
         }
-        if(request.studentId()!=null) {
-            return studentService.findAllByBuildingId(request.studentId());
+        if(request.roomId()!=null) {
+            return studentService.findAllByRoomId(request.roomId());
         }
         if(request.contractId()!=null) {
-            return studentService.findAllByBuildingId(request.contractId());
+            return studentService.findAllByContractId(request.contractId());
         }
         return studentService.findAll();
+    }
+    @GetMapping("/search")
+    public List<StudentDTO> searchStudents(@RequestParam String searchFilter) {
+
+        return studentService.search(searchFilter);
     }
 
     @GetMapping("{studentId}")

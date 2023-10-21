@@ -25,6 +25,7 @@ public interface StudentService {
     List<StudentDTO> findAllByBuildingFloorId(Integer id);
     List<StudentDTO> findAllByRoomId(Integer id);
     List<StudentDTO> findAllByContractId(Integer id);
+    List<StudentDTO> search(String searchTerm);
 
 
 }

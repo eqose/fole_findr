@@ -122,8 +122,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<StudentDTO> findAllByBuildingId(Integer id) {
          List<Integer> builidngsId  = buildingFloorRepository.findBuildingFloorByBuilding_Id(id).stream().map(i -> i.getId()).collect(Collectors.toList());
-        List<Integer> allIdByBuildingFloorIds = roomRepository.findAllIdByBuildingFloorIdIn(builidngsId);
-        return contractRepository.findAllDistinctStudentByRoomIdIn(allIdByBuildingFloorIds)
+        List<Integer> allIdByBuildingFloorIds = roomRepository.findRoomsIdByBuildingFloorIdIn(builidngsId).stream().map(i -> i.getId()).collect(Collectors.toList());
+        return contractRepository.findStudentsByRoomIdIn(allIdByBuildingFloorIds)
                 .stream()
                 .map(StudentMapper.INSTANCE::toDTO)
                 .collect(Collectors.toList());
@@ -131,8 +131,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDTO> findAllByBuildingFloorId(Integer id) {
-        List<Integer> allIdByBuildingFloorIds = roomRepository.findAllIdByBuildingFloorIdIn(List.of(id));
-        return contractRepository.findAllDistinctStudentByRoomIdIn(allIdByBuildingFloorIds)
+        List<Integer> allIdByBuildingFloorIds = roomRepository.findRoomsIdByBuildingFloorIdIn(List.of(id)).stream().map(i -> i.getId()).collect(Collectors.toList());
+        return contractRepository.findStudentsByRoomIdIn(allIdByBuildingFloorIds)
                 .stream()
                 .map(StudentMapper.INSTANCE::toDTO)
                 .collect(Collectors.toList());
@@ -140,7 +140,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDTO> findAllByRoomId(Integer id) {
-        return contractRepository.findAllDistinctStudentByRoomIdIn(List.of(id))
+        return contractRepository.findStudentsByRoomIdIn(List.of(id))
                 .stream()
                 .map(StudentMapper.INSTANCE::toDTO)
                 .collect(Collectors.toList());
@@ -149,6 +149,14 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<StudentDTO> findAllByContractId(Integer id) {
         return contractRepository.findAllDistinctStudentsById(id)
+                .stream()
+                .map(StudentMapper.INSTANCE::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StudentDTO> search(String searchTerm) {
+        return studentRepository.findStudentsByFullNameContaining(searchTerm)
                 .stream()
                 .map(StudentMapper.INSTANCE::toDTO)
                 .collect(Collectors.toList());
