@@ -21,5 +21,10 @@ public interface StudentService {
     void uploadStudentProfileImage(Integer studentId,
                                     MultipartFile file);
     byte[] getStudentProfileImage(Integer studentID);
+    List<StudentDTO> findAllByBuildingId(Integer buildingID);
+    List<StudentDTO> findAllByBuildingFloorId(Integer id);
+    List<StudentDTO> findAllByRoomId(Integer id);
+    List<StudentDTO> findAllByContractId(Integer id);
+
 
 }

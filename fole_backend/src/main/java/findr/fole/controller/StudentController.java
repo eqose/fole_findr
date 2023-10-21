@@ -28,7 +28,18 @@ public class StudentController {
 
     @GetMapping
     public List<StudentDTO> getStudents(@RequestBody StudentFilterRequest request) {
-
+        if(request.godinaId()!=null) {
+            return studentService.findAllByBuildingId(request.godinaId());
+        }
+        if(request.katiId()!=null) {
+            return studentService.findAllByBuildingId(request.katiId());
+        }
+        if(request.studentId()!=null) {
+            return studentService.findAllByBuildingId(request.studentId());
+        }
+        if(request.contractId()!=null) {
+            return studentService.findAllByBuildingId(request.contractId());
+        }
         return studentService.findAll();
     }
 

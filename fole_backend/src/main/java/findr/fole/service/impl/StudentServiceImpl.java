@@ -6,7 +6,7 @@ import findr.fole.exception.RequestValidationException;
 import findr.fole.exception.ResourceNotFoundException;
 import findr.fole.mapper.StudentMapper;
 import findr.fole.model.Student;
-import findr.fole.repository.StudentRepository;
+import findr.fole.repository.*;
 import findr.fole.rest.req.StudentRegistrationRequest;
 import findr.fole.rest.req.StudentUpdateRequest;
 import findr.fole.service.StudentService;
@@ -21,11 +21,18 @@ import java.util.stream.Collectors;
 @Service
 public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
+    private final BuildingRepository buildingRepository;
+    private final BuildingFloorRepository buildingFloorRepository;
+    private final ContractRepository contractRepository;
+    private final RoomRepository roomRepository;
 
-    public StudentServiceImpl(StudentRepository studentRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, BuildingRepository buildingRepository, BuildingFloorRepository buildingFloorRepository, ContractRepository contractRepository, RoomRepository roomRepository) {
         this.studentRepository = studentRepository;
+        this.buildingRepository = buildingRepository;
+        this.buildingFloorRepository = buildingFloorRepository;
+        this.contractRepository = contractRepository;
+        this.roomRepository = roomRepository;
     }
-
 
     @Override
     public List<StudentDTO> findAll(Specification<Student> spec, Pageable pageable) {
@@ -109,6 +116,42 @@ public class StudentServiceImpl implements StudentService {
     public byte[] getStudentProfileImage(Integer studentId) {
         //todo
         return new byte[0];
+    }
+
+
+    @Override
+    public List<StudentDTO> findAllByBuildingId(Integer id) {
+         List<Integer> builidngsId  = buildingFloorRepository.findBuildingFloorByBuilding_Id(id).stream().map(i -> i.getId()).collect(Collectors.toList());
+        List<Integer> allIdByBuildingFloorIds = roomRepository.findAllIdByBuildingFloorIdIn(builidngsId);
+        return contractRepository.findAllDistinctStudentByRoomIdIn(allIdByBuildingFloorIds)
+                .stream()
+                .map(StudentMapper.INSTANCE::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StudentDTO> findAllByBuildingFloorId(Integer id) {
+        List<Integer> allIdByBuildingFloorIds = roomRepository.findAllIdByBuildingFloorIdIn(List.of(id));
+        return contractRepository.findAllDistinctStudentByRoomIdIn(allIdByBuildingFloorIds)
+                .stream()
+                .map(StudentMapper.INSTANCE::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StudentDTO> findAllByRoomId(Integer id) {
+        return contractRepository.findAllDistinctStudentByRoomIdIn(List.of(id))
+                .stream()
+                .map(StudentMapper.INSTANCE::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StudentDTO> findAllByContractId(Integer id) {
+        return contractRepository.findAllDistinctStudentsById(id)
+                .stream()
+                .map(StudentMapper.INSTANCE::toDTO)
+                .collect(Collectors.toList());
     }
 
 
