@@ -41,6 +41,7 @@ export class StudentListComponent implements OnInit {
 
   public onNewStudent() {
     this.dialogService.open(StudentDetailComponent,{
+      data: {test: 'test'},
       header: 'Student i ri',
       width: '50vw',
       modal: true

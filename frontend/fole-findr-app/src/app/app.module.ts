@@ -28,6 +28,8 @@ import {SidebarModule} from "primeng/sidebar";
 import {DropdownModule} from "primeng/dropdown";
 import {CalendarModule} from "primeng/calendar";
 import { FreeStudentsListComponent } from './components/student-list/free-students-list/free-students-list.component';
+import { ContractDetailComponent } from './components/contracts/contract-detail/contract-detail.component';
+import { ContractListComponent } from './components/contracts/contract-list/contract-list.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { FreeStudentsListComponent } from './components/student-list/free-studen
     FloorListComponent,
     RoomListComponent,
     StudentDetailComponent,
-    FreeStudentsListComponent],
+    FreeStudentsListComponent,
+    ContractDetailComponent,
+    ContractListComponent],
   imports: [
     BrowserModule,
     FormsModule,

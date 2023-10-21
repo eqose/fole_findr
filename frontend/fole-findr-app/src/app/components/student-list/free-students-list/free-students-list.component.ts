@@ -3,6 +3,7 @@ import {StudentDetailComponent} from "../student-detail/student-detail.component
 import {Student} from "../../../model/student";
 import {StudentFilter} from "../../../model/student-filter";
 import {StudentService} from "../../../service/student.service";
+import {ContractDetailComponent} from "../../contracts/contract-detail/contract-detail.component";
 import {DialogService} from "primeng/dynamicdialog";
 
 @Component({
@@ -11,12 +12,12 @@ import {DialogService} from "primeng/dynamicdialog";
   styleUrls: ['./free-students-list.component.css'],
   providers: [DialogService]
 })
-export class FreeStudentsListComponent implements OnInit{
+export class FreeStudentsListComponent implements OnInit {
   public studentList: Student[] = [];
   public filter: StudentFilter = new StudentFilter();
 
   constructor(private readonly studentService: StudentService,
-              private readonly dialogService :DialogService) {
+              private readonly dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class FreeStudentsListComponent implements OnInit{
   }
 
   public onNewStudent() {
-    this.dialogService.open(StudentDetailComponent,{
+    this.dialogService.open(StudentDetailComponent, {
       header: 'Student i ri',
       width: '50vw',
       modal: true
@@ -42,7 +43,17 @@ export class FreeStudentsListComponent implements OnInit{
     })
   }
 
-  public onAddContract() {
-
+  public onAddContract(student: Student) {
+    this.dialogService.open(ContractDetailComponent, {
+      data: {
+        studentId: student.id,
+        studentName: student.firstName + ' ' + student.lastName
+      },
+      header: 'Kontrate e re',
+      width: '50vw',
+      modal: true
+    }).onClose.subscribe(() => {
+      this.loadStudentsOfBuilding()
+    })
   }
 }

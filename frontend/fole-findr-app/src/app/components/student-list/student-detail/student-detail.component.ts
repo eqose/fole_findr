@@ -8,7 +8,7 @@ import {DynamicDialogRef} from "primeng/dynamicdialog";
   selector: 'app-student-detail',
   templateUrl: './student-detail.component.html',
   styleUrls: ['./student-detail.component.css'],
-  providers: [DynamicDialogRef, MessageService ]
+  providers: [DynamicDialogRef, MessageService]
 })
 export class StudentDetailComponent implements OnInit {
   public student!: StudentRegistration;
