@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="dock-window">
+    <p-dock [model]="items" [position]="position">
+      <ng-template pTemplate="item" let-item>
+        <i [class]="item.icon"></i>
+      </ng-template>
+    </p-dock>
+  </div>
+</div>

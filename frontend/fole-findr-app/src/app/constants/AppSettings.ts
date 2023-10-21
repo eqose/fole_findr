@@ -1,3 +1,3 @@
 export class AppSettings{
-  public static BASE_URL = 'http://localhost:4200'
+  public static BASE_URL = 'http://localhost:9091'
 }

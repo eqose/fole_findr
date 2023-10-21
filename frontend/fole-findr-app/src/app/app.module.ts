@@ -13,11 +13,14 @@ import { AppRoutingModule } from './app-routing.module';
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {MessageModule} from "primeng/message";
 import {ToastModule} from "primeng/toast";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {DockModule} from "primeng/dock";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import {ToastModule} from "primeng/toast";
     RadioButtonModule,
     AppRoutingModule,
     ProgressSpinnerModule,
-    ToastModule
+    ToastModule,
+    DockModule
   ],
   providers: [],
   bootstrap: [AppComponent]

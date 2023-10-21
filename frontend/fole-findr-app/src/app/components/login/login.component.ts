@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AuthService} from "../../service/auth.service";
 import {MessageService} from "primeng/api";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -15,15 +16,16 @@ export class LoginComponent {
   public loader = false;
 
 
-  constructor(private readonly authService :AuthService,
-              private readonly messageService :MessageService) {
+  constructor(private readonly authService: AuthService,
+              private router: Router,
+              private readonly messageService: MessageService) {
   }
 
-  public setUsername(){
+  public setUsername() {
     console.log(this.username)
   }
 
-  public setPass(){
+  public setPass() {
     console.log(this.password)
   }
 
@@ -32,15 +34,24 @@ export class LoginComponent {
     const data = {username: this.username, password: this.password}
     this.authService.authenticateUser(data).subscribe({
       next: (data) => {
-        if (!data) {
-          this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Username ose password i gabuar!' });
+        if (data) {
+          localStorage.setItem('jwtToken', data.token)
+        } else {
+          this.messageService.add({severity: 'error', summary: 'Error!', detail: 'Username ose password i gabuar!'});
         }
       },
       error: (err) => {
         console.log('error', err)
         this.loader = false;
-        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Dicka shkoi keq! \nProvo perseri me vone!' });
-      }, complete: ()=> this.loader = false
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error!',
+          detail: 'Dicka shkoi keq! \nProvo perseri me vone!'
+        });
+      }, complete: () => {
+        this.loader = false
+        this.router.navigate(['/dashboard']);
+      }
     })
   }
 }

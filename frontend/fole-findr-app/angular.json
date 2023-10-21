@@ -67,7 +67,8 @@
               "browserTarget": "fole-findr-app:build:production"
             },
             "development": {
-              "browserTarget": "fole-findr-app:build:development"
+              "browserTarget": "fole-findr-app:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

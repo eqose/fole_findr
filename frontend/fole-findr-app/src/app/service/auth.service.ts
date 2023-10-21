@@ -7,12 +7,12 @@ import {AppSettings} from "../constants/AppSettings";
   providedIn: 'root'
 })
 export class AuthService {
-  private API_PRODUCT = '/api/v1/auth'
+  private API_PRODUCT = '/api/v1/auth/signin'
 
   constructor(private readonly httpClient: HttpClient) {
   }
 
-  public authenticateUser(data: any): Observable<boolean> {
-    return this.httpClient.post<boolean>(AppSettings.BASE_URL + this.API_PRODUCT, data);
+  public authenticateUser(data: any): Observable<any> {
+    return this.httpClient.post<any>(AppSettings.BASE_URL + this.API_PRODUCT, data);
   }
 }
