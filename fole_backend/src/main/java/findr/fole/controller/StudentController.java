@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -28,17 +29,20 @@ public class StudentController {
 
     @GetMapping
     public List<StudentDTO> getStudents(@RequestBody StudentFilterRequest request) {
+        LocalDate start = request.start()==null?LocalDate.MIN:request.start();
+        LocalDate end = request.end()==null?LocalDate.MAX:request.end();
+
         if(request.godinaId()!=null) {
-            return studentService.findAllByBuildingId(request.godinaId());
+            return studentService.findAllByBuildingId(request.godinaId(), start, end);
         }
         if(request.katiId()!=null) {
-            return studentService.findAllByBuildingFloorId(request.katiId());
+            return studentService.findAllByBuildingFloorId(request.katiId(), start, end);
         }
         if(request.roomId()!=null) {
-            return studentService.findAllByRoomId(request.roomId());
+            return studentService.findAllByRoomId(request.roomId(), start, end);
         }
         if(request.contractId()!=null) {
-            return studentService.findAllByContractId(request.contractId());
+            return studentService.findAllByContractId(request.contractId(), start, end);
         }
         return studentService.findAll();
     }

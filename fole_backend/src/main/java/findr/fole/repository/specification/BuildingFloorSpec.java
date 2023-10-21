@@ -1,4 +1,4 @@
-package findr.fole.specification;
+package findr.fole.repository.specification;
 
 import findr.fole.dto.BuildingDTO;
 import findr.fole.model.BuildingFloor;
