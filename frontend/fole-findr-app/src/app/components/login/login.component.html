@@ -2,11 +2,11 @@
   <h3 style="padding: 10px">Mirësevini në foléFindr</h3>
   <div style="display:flex; flex-direction: column; padding: 10px">
     <span>Username</span>
-    <input pInputText type="text" style="width: 100%" [(ngModel)]="username" (ngModelChange)="setUsername()">
+    <input pInputText type="text" style="width: 100%" [(ngModel)]="username">
   </div>
   <div style="display:flex; flex-direction: column; padding: 10px">
     <span>Password</span>
-    <input pInputText type="password" style="width: 100%" [(ngModel)]="password" (ngModelChange)="setPass()">
+    <input pInputText type="password" style="width: 100%" [(ngModel)]="password">
   </div>
   <div style="display: flex; padding: 10px; justify-content: space-between">
     <p-radioButton label="Menaxher" name="menaxher" value="Menaxher" [(ngModel)]="role"></p-radioButton>

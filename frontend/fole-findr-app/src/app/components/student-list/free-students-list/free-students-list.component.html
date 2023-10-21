@@ -1,0 +1,40 @@
+<div>
+  <p-card>
+    <div style="padding: 10px">
+      <button pButton
+              style="font-size: 16px"
+              label="Shto student"
+              (click)="onNewStudent()"
+              icon="fas fa-plus">
+      </button>
+    </div>
+    <p-table [value]="studentList">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Studenti</th>
+          <th>Shto kontrate</th>
+          <th>Aksionet</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-student>
+        <tr>
+          <td>
+            <div style="display: flex; justify-content: center; align-items: center">
+              <span>{{ student.firstName }}  {{student.lastName}}</span>
+            </div>
+          </td>
+          <td>
+            <div style="display: flex; justify-content: center; align-items: center">
+              <button pButton icon="fas fa-plus" (click)="onAddContract()"></button>
+            </div>
+          </td>
+          <td>
+            <div style="display: flex; justify-content: center; align-items: center">
+              <button pButton icon="fas fa-trash"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

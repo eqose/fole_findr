@@ -25,9 +25,9 @@ export class StudentListComponent implements OnInit {
   }
 
   public initFilter(){
-    // this.filter.startDate = this.getFirstAndLastDateOfMonth(new Date().getFullYear(), new Date().getMonth()).firstDate;
-    // this.filter.endDate = this.getFirstAndLastDateOfMonth(new Date().getFullYear(), new Date().getMonth()).lastDate;
-    // this.filter.godinaId = Number(sessionStorage.getItem("building"))
+    this.filter.startDate = this.getFirstAndLastDateOfMonth(new Date().getFullYear(), new Date().getMonth()).firstDate;
+    this.filter.endDate = this.getFirstAndLastDateOfMonth(new Date().getFullYear(), new Date().getMonth()).lastDate;
+    this.filter.godinaId = Number(sessionStorage.getItem("building"))
   }
 
   public loadStudentsOfBuilding() {

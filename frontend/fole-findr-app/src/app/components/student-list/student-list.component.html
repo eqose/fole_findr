@@ -22,6 +22,11 @@
           <td>{{ student.firstName }}</td>
         </tr>
       </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <div style="display: flex; align-items: center">
+          <span>Nuk ka asnje student me kontrate!</span>
+        </div>
+      </ng-template>
     </p-table>
   </p-card>
 </div>

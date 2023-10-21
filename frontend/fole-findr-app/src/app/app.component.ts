@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {DataSharingService} from "./service/data-sharing-service";
 import {Router} from "@angular/router";
+import {AuthService} from "./service/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,12 @@ export class AppComponent implements OnInit {
   public topItems: MenuItem[] = [];
   public selectedTopItem!: MenuItem;
   public inputName: string = '';
+  public loader = false;
+  public inDashboard = false;
 
   constructor(private readonly dataSharingService: DataSharingService,
-              private router: Router) {
+              private router: Router,
+              private readonly authService: AuthService) {
     this.dataSharingService.isLogged.subscribe((check) => {
       if (check) {
         this.isLogged = check;
@@ -27,19 +31,28 @@ export class AppComponent implements OnInit {
       }
     })
 
-    this.dataSharingService.menuItem.subscribe((item) =>{
-      if (item){
+    this.dataSharingService.menuItem.subscribe((item) => {
+      if (item) {
         this.selectedTopItem = this.topItems.filter(el => el.id == item)[0]
       }
+    })
+
+    this.dataSharingService.inDashboard.subscribe((check)=> {
+      this.inDashboard = check;
     })
   }
 
   ngOnInit() {
     this.items = [
       {
-        label: 'Studentet',
+        label: 'Studentet me kontrate',
         icon: 'fa-solid fa-people-roof',
-        routerLink: '/studentet'
+        routerLink: '/studentet-me-kontrate'
+      },
+      {
+        label: 'Studentet pa kontrate',
+        icon: 'fa-solid fa-person-circle-question',
+        routerLink: '/studentet-pa-kontrate'
       },
       {
         label: 'Dhomat',
@@ -75,16 +88,32 @@ export class AppComponent implements OnInit {
     ];
   }
 
-  onItemSelect(item: any){
+  onItemSelect(item: any) {
     this.sidebarVisible = false
     this.router.navigate([item.routerLink])
+    this.dataSharingService.inDashboard.next(false)
   }
 
   public onNameSearch() {
 
   }
 
-  public onLogOut(){
+  public onLogOut() {
+    this.loader = true;
+    setTimeout(() => {
+      this.isLogged = false;
+      this.authService.logout();
+      this.router.navigate(['/login']);
+      this.loader = false;
+    }, 500);
+  }
 
+  public onGoBack(){
+    this.loader = true;
+    this.sidebarVisible = false;
+    setTimeout(() => {
+      this.router.navigate(['/dashboard']);
+      this.loader = false;
+    }, 200);
   }
 }

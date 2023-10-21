@@ -4,14 +4,13 @@
 }
 
 
-
-.menu-item:hover{
+.menu-item:hover {
   font-weight: bold;
   background-color: #46fab4;
   cursor: pointer;
 }
 
-.menu-item{
+.menu-item {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -37,5 +36,17 @@
   position: relative;
   -webkit-user-select: none;
   user-select: none;
-  padding: 7px;
+  padding: 5px;
+}
+
+.back-div:hover {
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.back-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer
 }

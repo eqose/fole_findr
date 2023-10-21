@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit{
         this.items = items
       }
     })
+    this.dataSharingService.inDashboard.next(true);
   }
   public onBuildingClick(item: any) {
     this.loadFloors(item.id)
@@ -42,6 +43,17 @@ export class DashboardComponent implements OnInit{
   }
 
   public onFloorClick(id: number){
+    this.loader = true;
+    this.buildingService.getRoomsByFloor(id).subscribe({
+      next: (data)=> {},
+      error: (err)=> {
+
+      },
+      complete: ()=>{
+        this.loader=false
+      }
+    })
+
   }
 
   public loadFloors(id: number) {

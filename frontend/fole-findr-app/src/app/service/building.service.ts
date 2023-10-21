@@ -16,4 +16,8 @@ export class BuildingService {
   public getFloorsOfBuilding(id: number): Observable<BuildingFloor[]> {
     return this.httpClient.get<BuildingFloor[]>(AppSettings.BASE_URL + AppUrl.BUILDING_URL + '/' + id)
   }
+
+  public getRoomsByFloor(id: number): Observable<any> {
+    return this.httpClient.get<any>(AppSettings.BASE_URL + AppUrl.FLOOR_URL + '/' + id);
+  }
 }

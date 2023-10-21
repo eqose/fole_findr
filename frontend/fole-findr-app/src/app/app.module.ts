@@ -27,6 +27,7 @@ import { StudentDetailComponent } from './components/student-list/student-detail
 import {SidebarModule} from "primeng/sidebar";
 import {DropdownModule} from "primeng/dropdown";
 import {CalendarModule} from "primeng/calendar";
+import { FreeStudentsListComponent } from './components/student-list/free-students-list/free-students-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {CalendarModule} from "primeng/calendar";
     StudentListComponent,
     FloorListComponent,
     RoomListComponent,
-    StudentDetailComponent],
+    StudentDetailComponent,
+    FreeStudentsListComponent],
   imports: [
     BrowserModule,
     FormsModule,

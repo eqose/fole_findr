@@ -3,6 +3,6 @@ export class StudentFilter {
   katiId!: number;
   roomId!: number;
   contractId!: number;
-  // startDate!: Date;
-  // endDate!: Date;
+  startDate!: Date;
+  endDate!: Date;
 }

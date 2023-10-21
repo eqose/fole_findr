@@ -19,16 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private readonly authService: AuthService,
               private router: Router,
-              private readonly dataSharingService :DataSharingService,
+              private readonly dataSharingService: DataSharingService,
               private readonly messageService: MessageService) {
-  }
-
-  public setUsername() {
-    console.log(this.username)
-  }
-
-  public setPass() {
-    console.log(this.password)
   }
 
   public onAuthenticate() {

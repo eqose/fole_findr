@@ -1,7 +1,7 @@
 <div>
-  <div class="top-panel" style="display: flex; justify-content: space-between">
+  <div class="top-panel" style="display: flex; justify-content: space-between" *ngIf="isLogged">
     <p-button type="button" class="cts-button" (click)="sidebarVisible = true" icon="fa-solid fa-bars"></p-button>
-    <div style="display: flex; width: 21vw;justify-content: space-between;align-items: center;">
+    <div style="display: flex; width: 20vw;justify-content: space-between;align-items: center;">
       <span>Godina ku ndodheni: </span>
       <p-dropdown class="home-dp" [options]="topItems" [(ngModel)]="selectedTopItem" optionLabel="label"></p-dropdown>
     </div>
@@ -28,8 +28,14 @@
           </div>
         </ng-container>
       </ng-template>
-      <ng-template pTemplate="footer">Kthehu ne dashboard</ng-template>
+      <ng-template pTemplate="footer">
+        <div *ngIf="!inDashboard" class="back-div" (click)="onGoBack()">
+          <i class="fa-solid fa-angles-left" style="margin-right: 5px"></i>
+          <span>Kthehu ne dashboard</span>
+        </div>
+      </ng-template>
     </p-sidebar>
   </div>
   <router-outlet></router-outlet>
 </div>
+<p-progressSpinner *ngIf="loader" class="loading-container"></p-progressSpinner>
