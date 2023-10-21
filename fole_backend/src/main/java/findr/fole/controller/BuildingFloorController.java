@@ -16,8 +16,8 @@ public class BuildingFloorController {
         this.buildingFloorService = buildingFloorService;
     }
 
-    @GetMapping
-    public List<BuildingFloorDTO> getBuildingFloors(@RequestBody Integer buildingId) {
+    @GetMapping("{buildingId}")
+    public List<BuildingFloorDTO> getBuildingFloors(@PathVariable Integer buildingId) {
         return buildingFloorService.findAll(buildingId);
     }
 }
