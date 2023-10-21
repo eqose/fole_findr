@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface StudentService {
@@ -21,10 +22,10 @@ public interface StudentService {
     void uploadStudentProfileImage(Integer studentId,
                                     MultipartFile file);
     byte[] getStudentProfileImage(Integer studentID);
-    List<StudentDTO> findAllByBuildingId(Integer buildingID);
-    List<StudentDTO> findAllByBuildingFloorId(Integer id);
-    List<StudentDTO> findAllByRoomId(Integer id);
-    List<StudentDTO> findAllByContractId(Integer id);
+    List<StudentDTO> findAllByBuildingId(Integer buildingID, LocalDate start, LocalDate end);
+    List<StudentDTO> findAllByBuildingFloorId(Integer id, LocalDate start, LocalDate end);
+    List<StudentDTO> findAllByRoomId(Integer id, LocalDate start, LocalDate end);
+    List<StudentDTO> findAllByContractId(Integer id, LocalDate start, LocalDate end);
     List<StudentDTO> search(String searchTerm);
 
 
