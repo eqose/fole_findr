@@ -1,5 +1,6 @@
 package findr.fole.service;
 
+import findr.fole.dto.BuildingDTO;
 import findr.fole.dto.BuildingFloorDTO;
 import findr.fole.model.BuildingFloor;
 import findr.fole.rest.req.StudentRegistrationRequest;
@@ -11,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface BuildingService {
-    List<BuildingFloorDTO> findAll(Specification<BuildingFloor> spec, Pageable pageable);
-    List<BuildingFloorDTO> findAll(Specification<BuildingFloor> spec);
-    List<BuildingFloorDTO> findAll();
+    List<BuildingDTO> findAll(Specification<BuildingFloor> spec, Pageable pageable);
+    List<BuildingDTO> findAll(Specification<BuildingFloor> spec);
+    List<BuildingDTO> findAll();
 }
