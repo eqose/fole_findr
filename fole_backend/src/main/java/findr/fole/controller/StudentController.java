@@ -26,7 +26,7 @@ public class StudentController {
         this.buildingFloorService = buildingFloorService;
     }
 
-    @GetMapping
+    @PostMapping("/students")
     public List<StudentDTO> getStudents(@RequestBody StudentFilterRequest request) {
         if(request.godinaId()!=null) {
             return studentService.findAllByBuildingId(request.godinaId());
