@@ -47,7 +47,8 @@ export class FreeStudentsListComponent implements OnInit {
     this.dialogService.open(ContractDetailComponent, {
       data: {
         studentId: student.id,
-        studentName: student.firstName + ' ' + student.lastName
+        studentName: student.firstName + ' ' + student.lastName,
+        studenNId: student.nationalNo
       },
       header: 'Kontrate e re',
       width: '50vw',

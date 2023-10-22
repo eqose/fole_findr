@@ -46,11 +46,10 @@ public class ContractController {
     }
 
     @PostMapping
-    public ResponseEntity registerContract(
+    public void registerContract(
             @RequestBody ContractInsertRequest request
             ) {
         contractService.addContract(request);
-        return ResponseEntity.ok("Success");
     }
 
     @GetMapping("/active") //todo change format

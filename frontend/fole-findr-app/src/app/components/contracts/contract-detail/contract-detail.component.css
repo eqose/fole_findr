@@ -9,3 +9,7 @@ span {
   align-items: center;
   padding: 5px;
 }
+
+.custom-d ::ng-deep .p-dropdown{
+  width: 170px;
+}
