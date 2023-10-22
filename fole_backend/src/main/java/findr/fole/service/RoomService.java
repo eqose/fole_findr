@@ -11,4 +11,5 @@ public interface RoomService {
 
     Room findByStudentId(Integer studentId);
 
+    List<RoomDTO> findAllFloorsBetweenDates(LocalDate start, LocalDate end,  Integer idFloor);
 }
