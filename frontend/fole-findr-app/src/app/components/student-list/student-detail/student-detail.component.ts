@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {StudentRegistration} from "../../../model/student-registration";
 import {StudentService} from "../../../service/student.service";
 import {MessageService} from "primeng/api";
-import {DynamicDialogRef} from "primeng/dynamicdialog";
+import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
+import {Student} from "../../../model/student";
 
 @Component({
   selector: 'app-student-detail',
@@ -16,11 +17,18 @@ export class StudentDetailComponent implements OnInit {
 
   constructor(private readonly studentService: StudentService,
               private readonly ref: DynamicDialogRef,
+              private readonly config: DynamicDialogConfig,
               private readonly messageService: MessageService) {
   }
 
   ngOnInit(): void {
     this.student = new StudentRegistration();
+    if (this.config.data.student){
+      this.student.firstName = this.config.data.student.firstName;
+      this.student.lastName = this.config.data.student.lastName;
+      this.student.nId = this.config.data.student.nationalNo;
+      this.student.birthDay = this.config.data.student.birthDay;
+    }
   }
 
   public onStudentSave() {

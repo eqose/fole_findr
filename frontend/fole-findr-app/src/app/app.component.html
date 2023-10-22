@@ -3,7 +3,7 @@
     <p-button type="button" class="cts-button" (click)="sidebarVisible = true" icon="fa-solid fa-bars"></p-button>
     <div style="display: flex; width: 20vw;justify-content: space-between;align-items: center;">
       <span>Godina ku ndodheni: </span>
-      <p-dropdown class="home-dp" [options]="topItems" [(ngModel)]="selectedTopItem" optionLabel="label"></p-dropdown>
+      <p-dropdown class="home-dp" [options]="topItems" (onChange)="resetView()" [(ngModel)]="selectedTopItem" optionLabel="label"></p-dropdown>
     </div>
     <div style="width: 50px;display: flex;align-items: center;">
       <i style="cursor: pointer;font-size: 20px; color: #096547" class="fa-solid fa-right-from-bracket" (click)="onLogOut()"></i>

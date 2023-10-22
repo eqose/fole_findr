@@ -16,11 +16,12 @@ export class FloorListComponent implements OnInit{
               private router: Router) {
   }
   ngOnInit(): void {
+    this.loadFloors();
   }
 
-  public loadFloors(id: number) {
+  public loadFloors() {
     this.loader = true
-    this.buildingService.getFloorsOfBuilding(id).subscribe({
+    this.buildingService.getFloorsOfBuilding(Number(sessionStorage.getItem('building'))).subscribe({
       next: (data) => this.floorList = data.reverse(),
       error: (err) => console.log('error', err),
       complete: () => this.loader = false

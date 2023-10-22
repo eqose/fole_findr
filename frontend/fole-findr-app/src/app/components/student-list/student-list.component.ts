@@ -9,14 +9,14 @@ import {StudentFilter} from "../../model/student-filter";
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.css'],
-  providers: [DialogService ]
+  providers: [DialogService]
 })
 export class StudentListComponent implements OnInit {
   public studentList: Student[] = [];
   public filter: StudentFilter = new StudentFilter();
 
   constructor(private readonly studentService: StudentService,
-              private readonly dialogService :DialogService) {
+              private readonly dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -24,10 +24,10 @@ export class StudentListComponent implements OnInit {
     this.loadStudentsOfBuilding()
   }
 
-  public initFilter(){
-    this.filter.startDate = this.getFirstAndLastDateOfMonth(new Date().getFullYear(), new Date().getMonth()).firstDate;
-    this.filter.endDate = this.getFirstAndLastDateOfMonth(new Date().getFullYear(), new Date().getMonth()).lastDate;
-    // this.filter.godinaId = Number(sessionStorage.getItem("building"))
+  public initFilter() {
+    this.filter.start = this.getFirstAndLastDateOfMonth(new Date().getFullYear(), new Date().getMonth()).firstDate;
+    this.filter.end = this.getFirstAndLastDateOfMonth(new Date().getFullYear(), new Date().getMonth()).lastDate;
+    this.filter.godinaId = Number(sessionStorage.getItem("building"))
   }
 
   public loadStudentsOfBuilding() {
@@ -39,21 +39,21 @@ export class StudentListComponent implements OnInit {
     })
   }
 
-  public onNewStudent() {
-    this.dialogService.open(StudentDetailComponent,{
-      data: {test: 'test'},
-      header: 'Student i ri',
+  private getFirstAndLastDateOfMonth(year: number, month: number): { firstDate: Date, lastDate: Date } {
+    const firstDate = new Date(year, month - 1, 2);
+    const lastDate = new Date(year, month, 1);
+
+    return {firstDate, lastDate};
+  }
+
+  public openStudentProfile(student?: Student) {
+    this.dialogService.open(StudentDetailComponent, {
+      data: {student: student ? student : null},
+      header: student ? 'Profili i: ' + student.firstName + ' ' + student.lastName : 'Student i ri',
       width: '50vw',
       modal: true
     }).onClose.subscribe(() => {
       this.loadStudentsOfBuilding()
     })
-  }
-
-  private getFirstAndLastDateOfMonth(year: number, month: number): { firstDate: Date, lastDate: Date } {
-    const firstDate = new Date(year, month - 1, 1);
-    const lastDate = new Date(year, month, 0);
-
-    return { firstDate, lastDate };
   }
 }

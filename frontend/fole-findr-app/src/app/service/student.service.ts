@@ -21,4 +21,5 @@ export class StudentService {
   public saveStudent(student: StudentRegistration): Observable<any>{
     return this.httpClient.post<any>(AppSettings.BASE_URL + AppUrl.STUDENT_URL, student)
   }
+
 }

@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {BuildingService} from "../../service/building.service";
+import {Room} from "../../model/room";
 
 @Component({
   selector: 'app-room-list',
@@ -6,8 +8,27 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit{
-  public gridItems: number[] = Array.from({ length: 20 }, (_, i) => i + 1);
+  public gridItems: Room[] = [];
+
+  constructor(private readonly buildingService :BuildingService) {
+  }
   ngOnInit(): void {
+    this.loadRooms();
+  }
+
+  public loadRooms(){
+    this.buildingService.getRoomsByFloor(Number(sessionStorage.getItem('floor'))).subscribe({
+      next: (data)=> {
+        this.gridItems = data;
+        this.gridItems.forEach(el => {
+          el.roomDescr = el.name + ' ' +el.roomType.name;
+        })
+      }
+    })
+  }
+
+  public showStudents(){
+
   }
 
 }

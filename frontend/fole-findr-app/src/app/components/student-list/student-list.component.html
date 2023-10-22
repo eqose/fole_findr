@@ -4,22 +4,36 @@
       <button pButton
               style="font-size: 16px"
               label="Shto student"
-              (click)="onNewStudent()"
+              (click)="openStudentProfile()"
               icon="fas fa-plus"></button>
     </div>
     <p-table [value]="studentList">
       <ng-template pTemplate="header">
         <tr>
           <th>Studenti</th>
-          <th>Data e fillimit te kontrates</th>
-          <th>Data e mbarimit te kontrates</th>
+          <th>Statusi i kontrates</th>
           <th>Kati</th>
           <th>Dhoma</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-student>
-        <tr>
-          <td>{{ student.firstName }}</td>
+        <tr (click)="openStudentProfile(student)" style="cursor:pointer;">
+          <td>
+            <div style="display: flex; justify-content: center; align-items: center">
+              <span>{{ student.firstName }}  {{student.lastName}}</span>
+            </div>
+          <td>
+            <div style="display: flex; justify-content: center; align-items: center">
+              <span>Aktive</span>
+            </div>
+          <td>
+            <div style="display: flex; justify-content: center; align-items: center">
+              <span>{{ student.floor_id }}</span>
+            </div>
+          <td>
+            <div style="display: flex; justify-content: center; align-items: center">
+              <span>{{ student.room_id }}</span>
+            </div>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">

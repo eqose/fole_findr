@@ -1,5 +1,5 @@
 <div class="grid-container">
-  <div *ngFor="let item of gridItems" class="grid-item">
-    {{ item }}
+  <div *ngFor="let item of gridItems" class="grid-item" (click)="showStudents()">
+    {{ item.roomDescr }}
   </div>
 </div>

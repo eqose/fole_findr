@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   public isLogged: boolean = false;
   public items: MenuItem[] = [];
   public topItems: MenuItem[] = [];
-  public selectedTopItem!: MenuItem;
+  public selectedTopItem: any;
   public inputName: string = '';
   public loader = false;
   public inDashboard = false;
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
       }
     })
 
-    this.dataSharingService.inDashboard.subscribe((check)=> {
+    this.dataSharingService.inDashboard.subscribe((check) => {
       this.inDashboard = check;
     })
   }
@@ -103,10 +103,19 @@ export class AppComponent implements OnInit {
     }, 500);
   }
 
-  public onGoBack(){
+  public onGoBack() {
     this.loader = true;
     this.sidebarVisible = false;
     setTimeout(() => {
+      this.router.navigate(['/dashboard']);
+      this.loader = false;
+    }, 200);
+  }
+
+  public resetView() {
+    this.loader = true;
+    setTimeout(() => {
+      sessionStorage.setItem('building', this.selectedTopItem.id.toString())
       this.router.navigate(['/dashboard']);
       this.loader = false;
     }, 200);

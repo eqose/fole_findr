@@ -43,11 +43,12 @@ export class DashboardComponent implements OnInit {
     this.selectedBuilding = '';
   }
 
-  public onFloorClick(id: number) {
+  public onFloorClick(item: BuildingFloor) {
     this.loader = true;
     setTimeout(() => {
       this.loader = false;
-      this.router.navigate(['/dhomat', id])
+      sessionStorage.setItem('floor', item.id.toString())
+      this.router.navigate(['/dhomat', item.floorNum])
     }, 400);
   }
 

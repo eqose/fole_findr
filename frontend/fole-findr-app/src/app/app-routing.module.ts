@@ -13,8 +13,8 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'studentet-me-kontrate', component: StudentListComponent},
   {path: 'studentet-pa-kontrate', component: FreeStudentsListComponent},
-  {path: 'dhomat/:id', component: RoomListComponent},
   {path: 'dhomat', component: FloorListComponent},
+  {path: 'dhomat/:id', component: RoomListComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 ];
 

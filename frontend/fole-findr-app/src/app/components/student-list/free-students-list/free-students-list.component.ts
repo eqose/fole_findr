@@ -25,6 +25,7 @@ export class FreeStudentsListComponent implements OnInit {
   }
 
   public loadStudentsOfBuilding() {
+    this.filter.flNoContract = false;
     this.studentService.getStudents(this.filter).subscribe({
       next: (data) => {
         this.studentList = data;
