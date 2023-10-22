@@ -69,10 +69,15 @@ export class StudentListComponent implements OnInit {
   }
 
   public printPDF(student: Student){
-    this.contractService.generatePDF(student.contract_id).subscribe({
+    this.contractService.getContractsByStrudent(student.id).subscribe({
       next: (data)=> {
-        const pdfUrl = URL.createObjectURL(data.body);
-        const newWindow = window.open(pdfUrl, '_blank');
+        this.contractService.generatePDF(data[0].id).subscribe({
+          next: (bytes)=> {
+            const blob = new Blob([bytes], { type: 'text/csv' });
+            const url= URL.createObjectURL(blob);
+            window.open(url);
+          }
+        })
       }
     })
   }
