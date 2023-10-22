@@ -20,7 +20,7 @@ public interface ContractRepository extends JpaRepository<Contract, Integer> {
 //            " And :column = :id")
 //    List<Contract> findContracts(LocalDate start, LocalDate end, String column, Integer id);
 
-    @Query("SELECT c FROM Contract c where c.startDate >= :S and c.endDate <= :E AND c.room=:room")
+    @Query("SELECT c FROM Contract c where c.startDate <= :S and c.endDate >= :E AND c.room=:room")
     List<Contract> findContractByDateAndRoomId(LocalDate S, LocalDate E, Room room);
 
     @Query("SELECT c FROM Contract c where c.startDate <= :now and c.endDate >= :now ")
