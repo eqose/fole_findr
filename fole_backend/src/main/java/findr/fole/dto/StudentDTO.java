@@ -17,4 +17,10 @@ public class StudentDTO {
     private String lastName;
     private LocalDate birthDay;
     private String nationalNo;
+    private int floor_id;
+    private int room_id;
+    private int building_id;
+    private int contract_id;
+    private LocalDate startDate;
+    private LocalDate endDate;
 }
