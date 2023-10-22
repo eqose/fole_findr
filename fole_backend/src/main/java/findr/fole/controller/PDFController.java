@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1/pdfContract")
@@ -41,7 +42,7 @@ public class PDFController {
     }
 
     @GetMapping("{contractId}")
-    public ResponseEntity generateContract (@PathVariable("contractId") Integer contractId) throws DocumentException, FileNotFoundException {
+    public pdfObject generateContract (@PathVariable("contractId") Integer contractId) throws DocumentException, IOException {
         ContractDTO contractDTO = contractService.find(contractId);
         StudentDTO student = contractDTO.getStudents();
 //        FileOutputStream fos = new FileOutputStream(filePath);
@@ -109,8 +110,9 @@ public class PDFController {
         }
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename="+student.getFirstName() +" "+ student.getLastName() +".pdf");
-        return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(byteArrayInputStream));
+        return new pdfObject(new InputStreamResource(byteArrayInputStream).getContentAsByteArray());
 
     }
+
+    public record pdfObject(byte[] stream){};
 }
