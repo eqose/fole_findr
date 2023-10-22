@@ -26,4 +26,12 @@ export class BuildingService {
     const body = {start: start,end: end}
     return this.httpClient.post<Room[]>(AppSettings.BASE_URL + AppUrl.AVAILABLE_ROOMS_URL + '/' +id, body);
   }
+
+  public getRoomById(id:number): Observable<Room> {
+    return this.httpClient.get<Room>(AppSettings.BASE_URL + AppUrl.AVAILABLE_ROOMS_URL + '/room/' +id)
+  }
+
+  public getFloorById(id:number): Observable<BuildingFloor> {
+    return this.httpClient.get<BuildingFloor>(AppSettings.BASE_URL + AppUrl.BUILDING_URL + '/floor/' +id)
+  }
 }

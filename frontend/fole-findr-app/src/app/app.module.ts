@@ -31,6 +31,7 @@ import { FreeStudentsListComponent } from './components/student-list/free-studen
 import { ContractDetailComponent } from './components/contracts/contract-detail/contract-detail.component';
 import { ContractListComponent } from './components/contracts/contract-list/contract-list.component';
 import {AutoCompleteModule} from "primeng/autocomplete";
+import {RippleModule} from "primeng/ripple";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {AutoCompleteModule} from "primeng/autocomplete";
         SidebarModule,
         DropdownModule,
         CalendarModule,
-        AutoCompleteModule
+        AutoCompleteModule,
+        RippleModule
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}],

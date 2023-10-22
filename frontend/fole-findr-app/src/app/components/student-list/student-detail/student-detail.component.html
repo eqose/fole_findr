@@ -8,12 +8,12 @@
       <span>Mbiemri: </span>
       <input pInputText type="text" [(ngModel)]="student.lastName">
     </div>
-    <div class="input-div">
+    <div class="input-div" *ngIf="student.gender">
       <span>Gjinia: </span>
       <p-radioButton name="M" label="M" value="MALE" [(ngModel)]="student.gender"></p-radioButton>
       <p-radioButton name="F" label="F" value="FEMALE" [(ngModel)]="student.gender"></p-radioButton>
     </div>
-    <div class="input-div">
+    <div class="input-div" *ngIf="student.birthDay">
       <span>Data e lindjes: </span>
       <p-calendar appendTo="body" [(ngModel)]="student.birthDay"></p-calendar>
     </div>
@@ -21,9 +21,17 @@
       <span>Nr. identitetit: </span>
       <input pInputText type="text" [(ngModel)]="student.nId">
     </div>
-    <div class="input-div">
+    <div class="input-div" *ngIf="student.email">
       <span>Emaili: </span>
       <input pInputText type="text" [(ngModel)]="student.email">
+    </div>
+    <div class="input-div" *ngIf="room">
+      <span>Dhoma: </span>
+      <input pInputText [disabled]="true" type="text" [(ngModel)]="room">
+    </div>
+    <div class="input-div" *ngIf="floor">
+      <span>Kati: </span>
+      <input pInputText [disabled]="true" type="text" [(ngModel)]="floor">
     </div>
     <div style="display: flex; justify-content: flex-end; padding: 10px">
       <button pButton label="Ruaj" (click)="onStudentSave()"></button>

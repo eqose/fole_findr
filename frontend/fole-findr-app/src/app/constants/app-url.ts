@@ -5,4 +5,5 @@ export class AppUrl {
   public static FLOOR_URL = '/api/v1/buildingFloors';
   public static CONTRACT_URL = '/api/v1/contract';
   public static AVAILABLE_ROOMS_URL = '/api/v1/availableRooms';
+  public static PDF_URL = '/api/v1/pdfContract';
 }

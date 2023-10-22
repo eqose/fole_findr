@@ -6,4 +6,6 @@ export class StudentRegistration {
   nId!: string;
   birthDay!: Date;
   gender!: string;
+  idRoom!: number;
+  idFloor!: number;
 }

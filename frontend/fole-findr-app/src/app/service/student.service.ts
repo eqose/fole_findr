@@ -29,4 +29,8 @@ export class StudentService {
     return this.httpClient.get<Student[]>(AppSettings.BASE_URL + AppUrl.STUDENT_URL + '/search', {params})
   }
 
+  public getResidenceById(id:number): Observable<any>{
+    return this.httpClient.get<any>(AppSettings.BASE_URL + AppUrl.STUDENT_URL + '/'+id + '/info')
+  }
+
 }

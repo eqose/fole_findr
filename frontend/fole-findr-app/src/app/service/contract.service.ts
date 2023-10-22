@@ -25,4 +25,8 @@ export class ContractService {
   public saveContract(contract: ContractInsert): Observable<void> {
     return this.httpClient.post<void>(AppSettings.BASE_URL + AppUrl.CONTRACT_URL, contract);
   }
+
+  public generatePDF(id:number): Observable<any> {
+    return this.httpClient.get<any>(AppSettings.BASE_URL + AppUrl.PDF_URL + '/' + id);
+  }
 }

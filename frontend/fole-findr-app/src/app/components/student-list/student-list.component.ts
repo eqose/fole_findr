@@ -5,6 +5,7 @@ import {DialogService, DynamicDialogConfig} from "primeng/dynamicdialog";
 import {StudentDetailComponent} from "./student-detail/student-detail.component";
 import {StudentFilter} from "../../model/student-filter";
 import {DataSharingService} from "../../service/data-sharing-service";
+import {ContractService} from "../../service/contract.service";
 
 @Component({
   selector: 'app-student-list',
@@ -17,13 +18,14 @@ export class StudentListComponent implements OnInit {
   public filter: StudentFilter = new StudentFilter();
 
   constructor(private readonly studentService: StudentService,
+              private readonly contractService :ContractService,
               private readonly dataSharingService :DataSharingService,
               private readonly dialogService: DialogService) {
   }
 
   ngOnInit(): void {
     this.dataSharingService.listStudents.subscribe((list)=> {
-      if (list){
+      if (list.length>0){
         this.studentList = list
       }
       else {
@@ -63,6 +65,15 @@ export class StudentListComponent implements OnInit {
       modal: true
     }).onClose.subscribe(() => {
       this.loadStudentsOfBuilding()
+    })
+  }
+
+  public printPDF(student: Student){
+    this.contractService.generatePDF(student.contract_id).subscribe({
+      next: (data)=> {
+        const pdfUrl = URL.createObjectURL(data.body);
+        const newWindow = window.open(pdfUrl, '_blank');
+      }
     })
   }
 }
