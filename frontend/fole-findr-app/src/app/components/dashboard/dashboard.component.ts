@@ -10,7 +10,7 @@ import {DataSharingService} from "../../service/data-sharing-service";
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
   public items: MenuItem[] = [];
   public floorShow = false;
   public selectedBuilding: string = '';
@@ -18,18 +18,19 @@ export class DashboardComponent implements OnInit{
   public loader = false;
 
   constructor(private router: Router,
-              private readonly buildingService :BuildingService,
-              private readonly dataSharingService :DataSharingService) {
+              private readonly buildingService: BuildingService,
+              private readonly dataSharingService: DataSharingService) {
   }
 
   ngOnInit() {
-    this.dataSharingService.menuItems.subscribe((items)=>{
-      if (items){
+    this.dataSharingService.menuItems.subscribe((items) => {
+      if (items) {
         this.items = items
       }
     })
     this.dataSharingService.inDashboard.next(true);
   }
+
   public onBuildingClick(item: any) {
     this.loadFloors(item.id)
     this.floorShow = true;
@@ -37,31 +38,25 @@ export class DashboardComponent implements OnInit{
     this.selectedBuilding = item.label;
   }
 
-  public onCloseFloors(){
+  public onCloseFloors() {
     this.floorShow = false;
     this.selectedBuilding = '';
   }
 
-  public onFloorClick(id: number){
+  public onFloorClick(id: number) {
     this.loader = true;
-    this.buildingService.getRoomsByFloor(id).subscribe({
-      next: (data)=> {},
-      error: (err)=> {
-
-      },
-      complete: ()=>{
-        this.loader=false
-      }
-    })
-
+    setTimeout(() => {
+      this.loader = false;
+      this.router.navigate(['/dhomat', id])
+    }, 400);
   }
 
   public loadFloors(id: number) {
     this.loader = true
     this.buildingService.getFloorsOfBuilding(id).subscribe({
-      next: (data)=> this.floorList = data.reverse(),
+      next: (data) => this.floorList = data.reverse(),
       error: (err) => console.log('error', err),
-      complete: ()=> this.loader = false
+      complete: () => this.loader = false
     })
   }
 }

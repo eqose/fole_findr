@@ -6,13 +6,15 @@ import {AuthGuard} from "../auth.guard";
 import {StudentListComponent} from "./components/student-list/student-list.component";
 import {FreeStudentsListComponent} from "./components/student-list/free-students-list/free-students-list.component";
 import {RoomListComponent} from "./components/room-list/room-list.component";
+import {FloorListComponent} from "./components/floor-list/floor-list.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'studentet-me-kontrate', component: StudentListComponent},
   {path: 'studentet-pa-kontrate', component: FreeStudentsListComponent},
-  {path: 'dhomat', component: RoomListComponent},
+  {path: 'dhomat/:id', component: RoomListComponent},
+  {path: 'dhomat', component: FloorListComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 ];
 

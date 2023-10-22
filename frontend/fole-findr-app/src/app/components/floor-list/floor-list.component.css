@@ -1,0 +1,12 @@
+.bordered-div {
+  width: 55%;
+  border: 2px solid #000;
+  padding: 10px;
+  background-color: #f8ffcb;
+  text-align: center;
+}
+
+.bordered-div:hover {
+  transform: scale(1.15);
+  cursor: pointer;
+}

@@ -21,7 +21,7 @@
       <hr>
       <div style="display: flex; flex-direction: column; align-items: center;">
         <ng-container *ngFor="let item of floorList; let i = index">
-          <div class="bordered-div" (click)="onFloorClick(item.id)" [pTooltip]="item.roomNum + ' dhoma'">
+          <div class="bordered-div" (click)="onFloorClick(item.floorNum)" [pTooltip]="item.roomNum + ' dhoma'">
             <span>Kati {{item.floorNum}}</span>
           </div>
         </ng-container>

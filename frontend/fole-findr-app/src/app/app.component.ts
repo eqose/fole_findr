@@ -58,11 +58,6 @@ export class AppComponent implements OnInit {
         label: 'Dhomat',
         icon: 'fa-solid fa-person-shelter',
         routerLink: '/dhomat'
-      },
-      {
-        label: 'Regjistri',
-        icon: 'fa-solid fa-calendar-days',
-        routerLink: '/regjistrit'
       }
     ];
 
