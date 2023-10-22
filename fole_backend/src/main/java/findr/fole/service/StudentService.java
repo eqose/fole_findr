@@ -26,7 +26,7 @@ public interface StudentService {
     List<StudentDTO> findAllByBuildingFloorId(Integer id, LocalDate start, LocalDate end);
     List<StudentDTO> findAllByRoomId(Integer id, LocalDate start, LocalDate end);
     List<StudentDTO> findAllByContractId(Integer id, LocalDate start, LocalDate end);
+    List<StudentDTO> findAllWithNoContract();
     List<StudentDTO> search(String searchTerm);
-
 
 }

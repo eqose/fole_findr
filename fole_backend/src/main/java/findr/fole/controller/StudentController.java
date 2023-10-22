@@ -33,25 +33,53 @@ public class StudentController {
         this.roomService = roomService;
     }
 
-    @GetMapping
+    @PostMapping("/students")
     public List<StudentDTO> getStudents(@RequestBody StudentFilterRequest request) {
         LocalDate start = request.start()==null?LocalDate.MIN:request.start();
         LocalDate end = request.end()==null?LocalDate.MAX:request.end();
 
+
         if(request.godinaId()!=null) {
-            return studentService.findAllByBuildingId(request.godinaId(), start, end);
+            List<StudentDTO> list = studentService.findAllByBuildingId(request.godinaId(), start, end);
+            for (StudentDTO studentDTO : list) {
+                studentDTO.setBuilding_id(request.godinaId());
+            }
+            return list;
         }
         if(request.katiId()!=null) {
-            return studentService.findAllByBuildingFloorId(request.katiId(), start, end);
+            List<StudentDTO> list = studentService.findAllByBuildingFloorId(request.katiId(), start, end);
+            for (StudentDTO studentDTO : list) {
+                studentDTO.setFloor_id(request.katiId());
+            }
+            return list;
         }
         if(request.roomId()!=null) {
-            return studentService.findAllByRoomId(request.roomId(), start, end);
+            List<StudentDTO> list = studentService.findAllByRoomId(request.roomId(), start, end);
+            for (StudentDTO studentDTO : list) {
+                studentDTO.setRoom_id(request.roomId());
+            }
+            return list;
         }
+
         if(request.contractId()!=null) {
-            return studentService.findAllByContractId(request.contractId(), start, end);
+            List<StudentDTO> list = studentService.findAllByContractId(request.contractId(), start, end);
+            for (StudentDTO studentDTO : list) {
+                studentDTO.setContract_id(request.contractId());
+                studentDTO.setStartDate(request.start());
+                studentDTO.setEndDate(request.end());
+            }
+            return list;
         }
+
+        if (!request.flNoContract()) {
+            List<StudentDTO> list = studentService.findAllWithNoContract();
+            return list;
+        }
+
+
         return studentService.findAll();
     }
+
     @GetMapping("/search")
     public List<StudentDTO> searchStudents(@RequestParam String searchFilter) {
 
@@ -71,10 +99,9 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<?> registerStudent(
+    public void registerStudent(
             @RequestBody StudentRegistrationRequest request) {
         studentService.addStudent(request);
-        return ResponseEntity.ok("Succesfully added!");
     }
 
     @DeleteMapping("{studentId}")

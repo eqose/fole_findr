@@ -1,0 +1,9 @@
+::ng-deep .cust.p-button.p-button-icon-only {
+  background-color: #27c792;
+}
+
+::ng-deep .cust.p-button:enabled:hover {
+  background: #098a62;
+  color: #ffffff;
+  border-color: #086044;
+}

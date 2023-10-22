@@ -20,7 +20,7 @@ public class BuildingController {
         this.buildingFloorService = buildingFloorService;
     }
 
-    @GetMapping("{buildingId}")
+    @GetMapping("/{buildingId}")
     public List<BuildingFloorDTO> getBuildingFloors(@PathVariable Integer buildingId) {
         return buildingFloorService.findAll(buildingId);
     }

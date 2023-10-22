@@ -8,6 +8,7 @@ import findr.fole.repository.RoomRepository;
 import findr.fole.service.RoomService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,5 +34,6 @@ public class RoomServiceImpl implements RoomService {
     public Room findByStudentId(Integer studentId) {
         return contractRepository.findRoomsByStudentId(studentId)
                 .get(0);
+
     }
 }

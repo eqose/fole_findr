@@ -1,0 +1,52 @@
+::ng-deep .p-sidebar {
+  background-color: #b2ffe0;
+  width: 20vw !important;
+}
+
+
+.menu-item:hover {
+  font-weight: bold;
+  background-color: #46fab4;
+  cursor: pointer;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.top-panel {
+  background-color: #b2ffe0;
+  height: 3vw
+}
+
+::ng-deep .cts-button .p-button.p-button-icon-only {
+  padding: 12px;
+  width: 100px;
+  background-color: #27c792;
+}
+
+::ng-deep .home-dp .p-dropdown {
+  display: inline-flex;
+  cursor: pointer;
+  width: 10vw;
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+  padding: 5px;
+}
+
+.back-div:hover {
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.back-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer
+}
