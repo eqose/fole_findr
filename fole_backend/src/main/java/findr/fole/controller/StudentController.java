@@ -58,10 +58,9 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<?> registerStudent(
+    public void registerStudent(
             @RequestBody StudentRegistrationRequest request) {
         studentService.addStudent(request);
-        return ResponseEntity.ok("Succesfully added!");
     }
 
     @DeleteMapping("{studentId}")

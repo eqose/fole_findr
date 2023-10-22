@@ -20,11 +20,11 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    @PostMapping
-    public List<RoomDTO> getAvailableRooms(@RequestBody RoomFilterRequest request) {
+    @PostMapping("/{idFloor}")
+    public List<RoomDTO> getAvailableRooms(@RequestBody RoomFilterRequest request, @PathVariable("idFloor") Integer idFloor) {
         LocalDate start = request.start()==null?LocalDate.MIN:request.start();
         LocalDate end = request.end()==null?LocalDate.MAX:request.end();
 
-        return roomService.findAllFloorsBetweenDates(start, end);
+        return roomService.findAllFloorsBetweenDates(start, end, idFloor);
     }
 }

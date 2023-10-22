@@ -28,8 +28,8 @@ public class RoomServiceImpl implements RoomService {
 
 
     @Override
-    public List<RoomDTO> findAllFloorsBetweenDates(LocalDate dtStart, LocalDate dtEnd) {
-        return roomRepository.findAvailableRoomsBetweenDates(dtStart, dtEnd)
+    public List<RoomDTO> findAllFloorsBetweenDates(LocalDate dtStart, LocalDate dtEnd, Integer idFloor) {
+        return roomRepository.findAvailableRoomsBetweenDates(dtStart, dtEnd, idFloor)
                 .stream()
                 .map(RoomMapper.INSTANCE::toDTO)
                 .collect(Collectors.toList());

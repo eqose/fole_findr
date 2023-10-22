@@ -17,9 +17,10 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
             "LEFT JOIN Contract c " +
             "ON r.id = c.room.id " +
             "AND (c.startDate > :dtEnd OR c.endDate < :dtStart) " +
-            "WHERE c.id IS NULL")
+            "WHERE c.id IS NULL and r.buildingFloor.id= :idParam")
     List<Room> findAvailableRoomsBetweenDates(
             @Param("dtStart") LocalDate dtStart,
-            @Param("dtEnd") LocalDate dtEnd);
+            @Param("dtEnd") LocalDate dtEnd,
+            @Param("idParam") Integer idFloor);
 }
 

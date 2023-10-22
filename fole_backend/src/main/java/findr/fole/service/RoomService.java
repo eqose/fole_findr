@@ -8,5 +8,5 @@ import java.util.List;
 public interface RoomService {
     List<RoomDTO> findAllByFloorId(Integer id);
 
-    List<RoomDTO> findAllFloorsBetweenDates(LocalDate dtStart, LocalDate dtEnd);
+    List<RoomDTO> findAllFloorsBetweenDates(LocalDate dtStart, LocalDate dtEnd, Integer idFloor);
 }
