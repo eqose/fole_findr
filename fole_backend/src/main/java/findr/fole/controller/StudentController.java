@@ -65,6 +65,11 @@ public class StudentController {
             return list;
         }
 
+        if (!request.flNoContract()) {
+            List<StudentDTO> list = studentService.findAllWithNoContract();
+            return list;
+        }
+
 
         return studentService.findAll();
     }

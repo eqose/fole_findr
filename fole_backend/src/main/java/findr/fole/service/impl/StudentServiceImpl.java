@@ -65,7 +65,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void addStudent(StudentRegistrationRequest request) {
         String nationalId = request.nId();
-        if(studentRepository.existsStudentByNationalNo(nationalId)) {
+        if (studentRepository.existsStudentByNationalNo(nationalId)) {
             throw new DuplicateResourceException("National ID is already used");
         }
 
@@ -81,7 +81,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteStudentById(Integer studentId) {
-        if(!studentRepository.existsById(studentId)) {
+        if (!studentRepository.existsById(studentId)) {
             throw new ResourceNotFoundException(
                     "student with id [%s] not found".formatted(studentId)
             );
@@ -93,16 +93,16 @@ public class StudentServiceImpl implements StudentService {
     public void updateStudent(Integer studentId, StudentUpdateRequest request) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                "student with id [%s] not found".formatted(studentId)
-        ));
+                        "student with id [%s] not found".formatted(studentId)
+                ));
         boolean changes = false;
         // todo check every case ...
-        if(request.firstName() != null && !request.firstName().equals(student.getFirstName())) {
+        if (request.firstName() != null && !request.firstName().equals(student.getFirstName())) {
             student.setFirstName(request.firstName());
             changes = true;
         }
 
-        if(!changes) {
+        if (!changes) {
             throw new RequestValidationException("No changes");
         }
         studentRepository.save(student);
@@ -122,7 +122,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDTO> findAllByBuildingId(Integer id, LocalDate start, LocalDate end) {
-         List<Integer> builidngsId  = buildingFloorRepository.findBuildingFloorByBuilding_Id(id).stream().map(i -> i.getId()).collect(Collectors.toList());
+        List<Integer> builidngsId = buildingFloorRepository.findBuildingFloorByBuilding_Id(id).stream().map(i -> i.getId()).collect(Collectors.toList());
         List<Integer> allIdByBuildingFloorIds = roomRepository.findRoomsIdByBuildingFloorIdIn(builidngsId).stream().map(i -> i.getId()).collect(Collectors.toList());
         return contractRepository.findStudentsByRoomIdIn(allIdByBuildingFloorIds, start, end)
                 .stream()
@@ -150,6 +150,14 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<StudentDTO> findAllByContractId(Integer id, LocalDate start, LocalDate end) {
         return contractRepository.findAllDistinctStudentsById(id)
+                .stream()
+                .map(StudentMapper.INSTANCE::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StudentDTO> findAllWithNoContract() {
+        return this.studentRepository.findAllWithNoContract()
                 .stream()
                 .map(StudentMapper.INSTANCE::toDTO)
                 .collect(Collectors.toList());

@@ -13,4 +13,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     @Query("SELECT s FROM Student s WHERE CONCAT(s.firstName, ' ', s.lastName) LIKE %:searchTerm% OR s.firstName LIKE %:searchTerm% OR s.lastName LIKE %:searchTerm%")
     List<Student> findStudentsByFullNameContaining(String searchTerm);
+
+    @Query("from Student s left join Contract c on s.id=c.students.id where c.id is null")
+    List<Student> findAllWithNoContract();
 }

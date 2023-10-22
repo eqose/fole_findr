@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ContractRepository extends JpaRepository<Contract, Integer> {
-    @Query("SELECT DISTINCT c.students  FROM Contract c WHERE c.room.id IN :roomIds AND c.startDate >= :start and c.endDate <= :end")
+    @Query("SELECT DISTINCT c.students  FROM Contract c WHERE c.room.id IN :roomIds AND ((c.startDate <= :start and c.endDate >= :end) or (c.startDate >= :start and c.endDate <= :end) or (c.startDate >= :start and c.endDate >= :end))")
     List<Student> findStudentsByRoomIdIn(List<Integer> roomIds, LocalDate start, LocalDate end);
     @Query("SELECT DISTINCT c.students FROM Contract c WHERE c.id IN :id")
     List<Student> findAllDistinctStudentsById(Integer id);
