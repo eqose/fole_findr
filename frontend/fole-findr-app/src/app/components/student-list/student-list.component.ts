@@ -73,12 +73,36 @@ export class StudentListComponent implements OnInit {
       next: (data)=> {
         this.contractService.generatePDF(data[0].id).subscribe({
           next: (bytes)=> {
-            const blob = new Blob([bytes], { type: 'text/csv' });
-            const url= URL.createObjectURL(blob);
-            window.open(url);
+            let uint8Array = this.base64ToUint8Array(bytes.stream.toString());
+            const blob = new Blob([uint8Array], { type: 'application/pdf' });
+
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = url;
+
+            link.setAttribute('download', 'downloaded-file.pdf');
+
+            document.body.appendChild(link);
+            link.click();
+
+            // Clean up resources
+            document.body.removeChild(link);
           }
         })
       }
     })
+  }
+
+  public base64ToUint8Array(base64: string): Uint8Array {
+    const binaryString = atob(base64);
+    const length = binaryString.length;
+    const uint8Array = new Uint8Array(length);
+
+    for (let i = 0; i < length; i++) {
+      uint8Array[i] = binaryString.charCodeAt(i);
+    }
+
+    return uint8Array;
   }
 }
