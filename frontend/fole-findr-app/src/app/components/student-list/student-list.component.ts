@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Student} from "../../model/student";
 import {StudentService} from "../../service/student.service";
-import {DialogService} from "primeng/dynamicdialog";
+import {DialogService, DynamicDialogConfig} from "primeng/dynamicdialog";
 import {StudentDetailComponent} from "./student-detail/student-detail.component";
 import {StudentFilter} from "../../model/student-filter";
+import {DataSharingService} from "../../service/data-sharing-service";
 
 @Component({
   selector: 'app-student-list',
@@ -16,12 +17,20 @@ export class StudentListComponent implements OnInit {
   public filter: StudentFilter = new StudentFilter();
 
   constructor(private readonly studentService: StudentService,
+              private readonly dataSharingService :DataSharingService,
               private readonly dialogService: DialogService) {
   }
 
   ngOnInit(): void {
-    this.initFilter();
-    this.loadStudentsOfBuilding()
+    this.dataSharingService.listStudents.subscribe((list)=> {
+      if (list){
+        this.studentList = list
+      }
+      else {
+        this.initFilter();
+        this.loadStudentsOfBuilding()
+      }
+    })
   }
 
   public initFilter() {

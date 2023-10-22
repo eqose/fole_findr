@@ -10,6 +10,7 @@ export class Student {
   contract_id!: number;
   startDate!: Date;
   endDate!: Date;
+  fullName!: string;
 
   constructor() {
   }

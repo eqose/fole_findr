@@ -3,12 +3,16 @@ import {MenuItem} from "primeng/api";
 import {DataSharingService} from "./service/data-sharing-service";
 import {Router} from "@angular/router";
 import {AuthService} from "./service/auth.service";
+import {StudentService} from "./service/student.service";
+import {Student} from "./model/student";
+import {StudentDetailComponent} from "./components/student-list/student-detail/student-detail.component";
+import {DialogService} from "primeng/dynamicdialog";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [DataSharingService]
+  providers: [DataSharingService, DialogService]
 })
 export class AppComponent implements OnInit {
   public sidebarVisible = false;
@@ -19,9 +23,13 @@ export class AppComponent implements OnInit {
   public inputName: string = '';
   public loader = false;
   public inDashboard = false;
+  public studentList: Student[] = [];
+  public selectedStudent!: Student;
 
   constructor(private readonly dataSharingService: DataSharingService,
               private router: Router,
+              private readonly dialogService: DialogService,
+              private readonly studentService: StudentService,
               private readonly authService: AuthService) {
     this.dataSharingService.isLogged.subscribe((check) => {
       if (check) {
@@ -90,7 +98,14 @@ export class AppComponent implements OnInit {
   }
 
   public onNameSearch() {
-
+    this.studentService.searchStudents(this.inputName).subscribe({
+      next: (data) => {
+        this.studentList = data
+        this.studentList.forEach(el => {
+          el.fullName = el.firstName + ' '+el.lastName
+        })
+      }
+    })
   }
 
   public onLogOut() {
@@ -119,5 +134,18 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/dashboard']);
       this.loader = false;
     }, 200);
+  }
+
+  public openModal(){
+    this.sidebarVisible = false;
+    this.dialogService.open(StudentDetailComponent, {
+      data: {student: this.selectedStudent},
+      header: 'Profili i: ' + this.selectedStudent.fullName,
+      width: '50vw',
+      modal: true
+    }).onClose.subscribe(()=> {
+      this.selectedStudent = new Student();
+      this.studentList = []
+    })
   }
 }

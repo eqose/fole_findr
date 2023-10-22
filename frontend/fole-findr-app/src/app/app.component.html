@@ -13,12 +13,7 @@
     <p-sidebar [(visible)]="sidebarVisible" position="left" styleClass="custom-sidebar-width" transitionOptions="300ms cubic-bezier(0, 0, 0.2, 1)">
       <ng-template pTemplate="header">
         <i class="fa-solid fa-magnifying-glass" style="margin-right: 5px;"></i>
-        <input pInputText
-               type="text"
-               style="font-size: 16px; margin-right: 3px"
-               placeholder="Kerko student..."
-               [(ngModel)]="inputName"
-               (ngModelChange)="onNameSearch()">
+        <p-autoComplete [suggestions]="studentList" placeholder="Kerko student..." (onSelect)="openModal()" [(ngModel)]="selectedStudent" (completeMethod)="onNameSearch()" field="fullName"></p-autoComplete>
       </ng-template>
       <ng-template pTemplate="content">
         <ng-container *ngFor="let item of items">

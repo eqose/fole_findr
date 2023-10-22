@@ -30,6 +30,7 @@ import {CalendarModule} from "primeng/calendar";
 import { FreeStudentsListComponent } from './components/student-list/free-students-list/free-students-list.component';
 import { ContractDetailComponent } from './components/contracts/contract-detail/contract-detail.component';
 import { ContractListComponent } from './components/contracts/contract-list/contract-list.component';
+import {AutoCompleteModule} from "primeng/autocomplete";
 
 @NgModule({
   declarations: [
@@ -44,27 +45,28 @@ import { ContractListComponent } from './components/contracts/contract-list/cont
     FreeStudentsListComponent,
     ContractDetailComponent,
     ContractListComponent],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    InputTextModule,
-    MessageModule,
-    HttpClientModule,
-    ButtonModule,
-    ReactiveFormsModule,
-    RadioButtonModule,
-    AppRoutingModule,
-    ProgressSpinnerModule,
-    ToastModule,
-    DockModule,
-    MenubarModule,
-    CardModule,
-    TableModule,
-    SidebarModule,
-    DropdownModule,
-    CalendarModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        InputTextModule,
+        MessageModule,
+        HttpClientModule,
+        ButtonModule,
+        ReactiveFormsModule,
+        RadioButtonModule,
+        AppRoutingModule,
+        ProgressSpinnerModule,
+        ToastModule,
+        DockModule,
+        MenubarModule,
+        CardModule,
+        TableModule,
+        SidebarModule,
+        DropdownModule,
+        CalendarModule,
+        AutoCompleteModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}],
   bootstrap: [AppComponent]
