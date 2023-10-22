@@ -1,6 +1,7 @@
 package findr.fole.service;
 
 import findr.fole.dto.BuildingFloorDTO;
+import findr.fole.dto.RoomDTO;
 import findr.fole.model.Student;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;

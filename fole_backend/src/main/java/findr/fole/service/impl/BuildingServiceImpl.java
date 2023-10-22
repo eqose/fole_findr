@@ -43,5 +43,4 @@ public class BuildingServiceImpl implements BuildingService {
                 .collect(Collectors.toList());
     }
 
-
 }
