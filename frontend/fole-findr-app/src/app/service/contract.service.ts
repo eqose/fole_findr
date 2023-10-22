@@ -22,7 +22,7 @@ export class ContractService {
     return this.httpClient.get<Contract[]>(AppSettings.BASE_URL + AppUrl.CONTRACT_URL + '/' + id);
   }
 
-  public saveContract(contract: ContractInsert): Observable<any> {
-    return this.httpClient.post<any>(AppSettings.BASE_URL + AppUrl.CONTRACT_URL, contract);
+  public saveContract(contract: ContractInsert): Observable<void> {
+    return this.httpClient.post<void>(AppSettings.BASE_URL + AppUrl.CONTRACT_URL, contract);
   }
 }

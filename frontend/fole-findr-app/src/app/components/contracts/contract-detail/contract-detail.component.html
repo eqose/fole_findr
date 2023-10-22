@@ -5,27 +5,38 @@
       <input pInputText type="text" [disabled]="true" [(ngModel)]="studentName">
     </div>
     <div class="input-div">
+      <span>Nr. identitetit: </span>
+      <input pInputText type="text" [disabled]="true" [(ngModel)]="studentNId">
+    </div>
+    <div class="input-div">
       <span>Data e fillimit: </span>
       <p-calendar appendTo="body" [(ngModel)]="contract.start"></p-calendar>
     </div>
     <div class="input-div">
       <span>Data e mbarimit: </span>
-      <p-calendar appendTo="body" [(ngModel)]="contract.end"></p-calendar>
-    </div>
-    <div class="input-div">
-      <span>Nr. identitetit: </span>
-      <input pInputText type="text" [(ngModel)]="contract.roomId">
+      <p-calendar appendTo="body" [minDate]="contract.start" [(ngModel)]="contract.end"></p-calendar>
     </div>
     <div class="input-div">
       <span>Kati: </span>
-      <p-dropdown [options]="floorList"
-                  appendTo="body"
-                  optionLabel="floorNum"
-                  [(ngModel)]="selectedFloor"></p-dropdown>
+      <div class="custom-d">
+        <p-dropdown [options]="floorList"
+                    appendTo="body"
+                    (onChange)="getListOfRooms()"
+                    optionLabel="floorNum"
+                    [(ngModel)]="selectedFloor">
+        </p-dropdown>
+      </div>
     </div>
     <div class="input-div">
       <span>Dhoma: </span>
-      <input pInputText type="text" [(ngModel)]="contract.note">
+      <div class="custom-d">
+        <p-dropdown [options]="roomList"
+                    appendTo="body"
+                    [disabled]="!selectedFloor"
+                    [(ngModel)]="selectedRoom"
+                    optionLabel="roomDescr">
+        </p-dropdown>
+      </div>
     </div>
     <div class="input-div">
       <span>Shenime: </span>

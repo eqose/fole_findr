@@ -5,5 +5,6 @@ export class Room {
   id!: number;
   name!: string;
   roomType!: RoomType;
+  roomDescr!: string;
   buildingFloorDTO!: BuildingFloor;
 }

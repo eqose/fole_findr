@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {BuildingFloor} from "../model/building-floor";
 import {AppSettings} from "../constants/app-settings";
 import {AppUrl} from "../constants/app-url";
+import {Room} from "../model/room";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,10 @@ export class BuildingService {
 
   public getRoomsByFloor(id: number): Observable<any> {
     return this.httpClient.get<any>(AppSettings.BASE_URL + AppUrl.FLOOR_URL + '/' + id);
+  }
+
+  public getAvailableRooms(start: Date, end:Date, id: number): Observable<Room[]>{
+    const body = {start: start,end: end}
+    return this.httpClient.post<Room[]>(AppSettings.BASE_URL + AppUrl.AVAILABLE_ROOMS_URL + '/' +id, body);
   }
 }
