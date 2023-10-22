@@ -65,6 +65,16 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    public List<ContractDTO> findAllByStatus(boolean flag) {
+        LocalDate now = LocalDate.now();
+        return contractRepository.findAllActiveByDate(now)
+                .stream()
+                .map(ContractMapper.INSTANCE::toDTO)
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
     public void addContract(ContractInsertRequest request) {
         Room room = roomRepository.findById(request.roomId()).orElseThrow(
                 () -> new ResourceNotFoundException("Room not found")

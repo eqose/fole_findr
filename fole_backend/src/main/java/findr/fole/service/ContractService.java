@@ -12,6 +12,7 @@ public interface ContractService {
     ContractDTO find(Integer contractID);
     List<ContractDTO> findAllContracts(LocalDate start, LocalDate end, String column, Integer id);
     List<ContractDTO> findAll();
+    List<ContractDTO> findAllByStatus(boolean flag);
     void addContract(ContractInsertRequest request);
 
 }

@@ -52,4 +52,9 @@ public class ContractController {
         contractService.addContract(request);
     }
 
+    @GetMapping("/active") //todo change format
+    public List<ContractDTO> getActiveContracts() {
+        return contractService.findAllByStatus(true);
+    }
+
 }
