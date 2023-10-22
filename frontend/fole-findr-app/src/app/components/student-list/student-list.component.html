@@ -1,0 +1,44 @@
+<div>
+  <p-card>
+    <div style="padding: 10px">
+      <button pButton
+              style="font-size: 16px"
+              label="Shto student"
+              (click)="openStudentProfile()"
+              icon="fas fa-plus"></button>
+    </div>
+    <p-table [value]="studentList">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Studenti</th>
+          <th>Statusi i kontrates</th>
+          <th>Printo</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-student>
+        <tr style="cursor:pointer;">
+          <td (click)="openStudentProfile(student)">
+            <div style="display: flex; justify-content: center; align-items: center">
+              <span>{{ student.firstName }}  {{student.lastName}}</span>
+            </div>
+          </td>
+          <td (click)="openStudentProfile(student)">
+            <div style="display: flex; justify-content: center; align-items: center">
+              <span>Aktive</span>
+            </div>
+          </td>
+          <td>
+            <div style="display: flex; justify-content: center; align-items: center">
+              <button pButton pRipple icon="fa-solid fa-file" (click)="printPDF(student)"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <div style="display: flex; align-items: center">
+          <span>Nuk ka asnje student me kontrate!</span>
+        </div>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

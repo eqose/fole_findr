@@ -1,0 +1,50 @@
+<div>
+  <p-card>
+    <div class="input-div">
+      <span>Studenti: </span>
+      <input pInputText type="text" [disabled]="true" [(ngModel)]="studentName">
+    </div>
+    <div class="input-div">
+      <span>Nr. identitetit: </span>
+      <input pInputText type="text" [disabled]="true" [(ngModel)]="studentNId">
+    </div>
+    <div class="input-div">
+      <span>Data e fillimit: </span>
+      <p-calendar appendTo="body" [(ngModel)]="contract.start"></p-calendar>
+    </div>
+    <div class="input-div">
+      <span>Data e mbarimit: </span>
+      <p-calendar appendTo="body" [minDate]="contract.start" [(ngModel)]="contract.end"></p-calendar>
+    </div>
+    <div class="input-div">
+      <span>Kati: </span>
+      <div class="custom-d">
+        <p-dropdown [options]="floorList"
+                    appendTo="body"
+                    (onChange)="getListOfRooms()"
+                    optionLabel="floorNum"
+                    [(ngModel)]="selectedFloor">
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="input-div">
+      <span>Dhoma: </span>
+      <div class="custom-d">
+        <p-dropdown [options]="roomList"
+                    appendTo="body"
+                    [disabled]="!selectedFloor"
+                    [(ngModel)]="selectedRoom"
+                    optionLabel="roomDescr">
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="input-div">
+      <span>Shenime: </span>
+      <input pInputText type="text" [(ngModel)]="contract.note">
+    </div>
+    <div style="display: flex; justify-content: flex-end; padding: 10px">
+      <button pButton label="Ruaj" (click)="onContractSave()"></button>
+    </div>
+  </p-card>
+</div>
+<p-progressSpinner *ngIf="loader" class="loading-container"></p-progressSpinner>
