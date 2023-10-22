@@ -1,5 +1,6 @@
 package findr.fole.repository;
 
+import findr.fole.dto.RoomDTO;
 import findr.fole.model.Contract;
 import findr.fole.model.Room;
 import findr.fole.model.Student;
@@ -25,5 +26,8 @@ public interface ContractRepository extends JpaRepository<Contract, Integer> {
 
     @Query("SELECT c FROM Contract c where c.startDate <= :now and c.endDate >= :now ")
     List<Contract> findAllActiveByDate(LocalDate now);
+
+    @Query("SELECT DISTINCT c.room FROM Contract c WHERE c.students.id = :id")
+    List<Room> findRoomsByStudentId(Integer id);
 
 }

@@ -1,11 +1,15 @@
 package findr.fole.controller;
 
+import findr.fole.dto.RoomDTO;
 import findr.fole.dto.StudentDTO;
+import findr.fole.model.Room;
 import findr.fole.rest.req.StudentFilterRequest;
 import findr.fole.rest.req.StudentRegistrationRequest;
 import findr.fole.rest.req.StudentUpdateRequest;
+import findr.fole.rest.res.StudentResidenceInfo;
 import findr.fole.service.BuildingFloorService;
 import findr.fole.service.BuildingService;
+import findr.fole.service.RoomService;
 import findr.fole.service.StudentService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +25,12 @@ public class StudentController {
     private final StudentService studentService;
     private final BuildingService buildingService;
     private final BuildingFloorService buildingFloorService;
-    public StudentController(StudentService studentService, BuildingService buildingService, BuildingFloorService buildingFloorService) {
+    private final RoomService roomService;
+    public StudentController(StudentService studentService, BuildingService buildingService, BuildingFloorService buildingFloorService, RoomService roomService) {
         this.studentService = studentService;
         this.buildingService = buildingService;
         this.buildingFloorService = buildingFloorService;
+        this.roomService = roomService;
     }
 
     @PostMapping("/students")
@@ -83,6 +89,13 @@ public class StudentController {
     @GetMapping("{studentId}")
     public StudentDTO getStudent(@PathVariable("studentId") Integer studentId) {
         return studentService.getStudent(studentId);
+    }
+
+    @GetMapping("{studentId}/info")
+    public StudentResidenceInfo getStudentInfo(@PathVariable("studentId") Integer studentId) {
+//        StudentDTO student = studentService.getStudent(studentId);
+        Room roomSStudent = roomService.findByStudentId(studentId);
+        return new StudentResidenceInfo(roomSStudent.getBuildingFloor().getFloorNum(), roomSStudent.getName());
     }
 
     @PostMapping

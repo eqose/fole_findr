@@ -1,6 +1,7 @@
 package findr.fole.service;
 
 import findr.fole.dto.RoomDTO;
+import findr.fole.model.Room;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,5 +9,6 @@ import java.util.List;
 public interface RoomService {
     List<RoomDTO> findAllByFloorId(Integer id);
 
-    List<RoomDTO> findAllFloorsBetweenDates(LocalDate dtStart, LocalDate dtEnd, Integer idFloor);
+    Room findByStudentId(Integer studentId);
+
 }

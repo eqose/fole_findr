@@ -19,8 +19,8 @@ public class FoleBackendApplication {
 	@Bean
 	ApplicationRunner runner(StudentService studentService, ContractService contractService) {
 		return args -> {
-			System.out.println(studentService.findAll());
-			System.out.println(contractService.findAllByStatus(true));
+//			System.out.println(studentService.findAll());
+//			System.out.println(contractService.findAllByStatus(true));
 		};
 	}
 
